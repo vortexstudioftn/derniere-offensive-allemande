@@ -1,5 +1,6 @@
-# Audit screenshots
+# Audit & test screenshots
 audit_*.png
+test_*.png
 .playwright-mcp/
 
 # Python

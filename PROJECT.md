@@ -5,43 +5,30 @@
 
 ---
 
-## État actuel — 2026-05-24 (session 4 — mode présentation clavier + arrowheads)
+## État actuel — 2026-05-24 (session 5 — audit + finitions + déploiement)
 
-**Stade** : Phase 4 — pilotage clavier en place, ergonomie d'oral verrouillée.
+**Stade** : Phase 5 — site **déployé en ligne**, toutes les finitions faites. Prêt pour la présentation.
 
-### Demande utilisateur (issue session 3)
-> "Ce qui cloche c'est que le scroll souris n'est jamais parfait, on pourrait passer à un système flèches gauche/droite pour les steps + haut/bas pour les chapitres ?"
-> "Les traits/points sur les cartes ne sont pas parfaits."
+**URL live** : https://vortexstudioftn.github.io/derniere-offensive-allemande/
 
-### Solutions session 4
-- [x] **Mode clavier complet** via `js/presentation.js` (PresentationController) :
-  - **← / →** : étape précédente / suivante dans le chapitre courant
-  - **↑ / ↓** : chapitre précédent / suivant (smooth scroll auto)
-  - **Espace** : avance (= →)
-  - **Home / End** : début / fin
-  - Compatible avec le scroll souris (les deux coexistent, le scroll suspend le mode clavier)
-  - Émet `presentation:step` que les sections écoutent, **et** émet `step:enter` (compat avec les cartes existantes)
-- [x] **HUD discret en bas d'écran** affichant le chapitre courant + numéro d'étape + rappels clavier — invisible tant qu'on n'a pas touché une touche
-- [x] **Slider Anatomie synchronisé** avec le mode clavier : ← → déplacent automatiquement le curseur dans la timeline
-- [x] **Pointes de flèches (arrowheads)** sur toutes les polylines : triangle SVG orienté calculé via l'angle des 2 derniers points, glow rouge/bleu selon le camp. Apparaît à la fin de l'animation de tracé.
+### Ce qui a été fait en session 5
+- [x] **Audit visuel via Playwright MCP** : navigation complète du site en mode clavier, capture de chaque section, vérification des marqueurs/flèches/labels sur toutes les cartes
+- [x] **Recalibrage géo** : alignement de toutes les coordonnées de villes (6 fichiers JS de cartes) sur `coordinates.json` — marqueurs désormais précis à la décimale (Amiens, Reims, Château-Thierry, Noyon, Soissons, Villers-Cotterêts, etc.)
+- [x] **Vitrail de Doullens** : carte commémorative intégrée après la grille Personnages — image du vitrail + texte explicatif sur la conférence du 26 mars 1918
+- [x] **Bloc "Backs to the wall"** : citation plein écran dramatique (Cormorant Garamond italic, guillemet rouge) entre Georgette et Blücher — l'ordre du jour de Haig du 11 avril 1918
+- [x] **Crop CSS** : classe `.img-crop-artillerie` créée pour `artillerie-allemande-1918.jpg` (object-position 65%)
+- [x] **Déploiement GitHub Pages** : repo `vortexstudioftn/derniere-offensive-allemande` créé, Pages activé, site live
+- [x] **Test 1080p via Playwright** : viewport 1920x1080, toutes les sections vérifiées — Hook, Contexte, Doullens, "Backs to the wall", Michael, Anatomie — tout lisible depuis le fond de la salle
 
 ### Architecture du mode clavier
 12 sections déclarées (incluant les 4 sous-batailles séparées) :
 hook(1) → contexte(4) → plan(1) → anatomie(12) → persos(1) → battle-michael(4) → battle-georgette(3) → battle-blucher(3) → battle-gneisenau(3) → friedensturm(5) → bilan(1) → sources(1)
 
-### Reste à traiter (session 5)
-0. **⚡ Playwright MCP configuré** (commande `claude mcp add playwright npx @playwright/mcp@latest` exécutée le 2026-05-24) → en session 5, Claude peut naviguer sur http://localhost:8000 et capturer le site lui-même via les outils `mcp__playwright__*`. **Démarrer d'abord `python -m http.server 8000` dans le projet**, puis demander à Claude d'aller faire l'audit visuel directement.
-0.bis **🛠️ Skills/agents projet créés** dans `.claude/` :
-   - **Skill `scrollytelling-patterns`** : auto-chargée quand on touche au scroll/clavier — codifie count-up, reveal, flyTo, sync clavier
-   - **Skill `map-authoring`** : auto-chargée quand on touche à `js/maps/*.js` — API MapFX, conventions couleur, checklist nouvelle carte
-   - **Agent `design-reviewer`** : à invoquer manuellement (`Agent design-reviewer`) — fait un audit Playwright + rapport markdown avec snippets de fix
-1. **Audit visuel ciblé via Playwright** des traits/points cartes (Anatomie à 3-4 positions du slider + Michael + Friedensturm) pour identifier précisément ce qui cloche
-2. **Recalibrage géo précis** : les positions actuelles sont des estimations à l'œil ; idéalement il faudrait des GeoJSON historiques (Mémoire des Hommes, NLS) pour les fronts du 21 mars, 9 avril, 27 mai, 15 juillet 1918
-3. **Vitrail Doullens** intégration
-4. **Texte "Backs to the wall"** comme bloc dramatique
-5. **Crop CSS** pour `artillerie-allemande-1918.jpg`
-6. **Déploiement GitHub Pages**
-7. **Test en conditions réelles** : projecteur 1080p, contrôler avec clavier USB, vérifier latence du smooth-scroll
+### Reste éventuel (optionnel, si temps)
+1. **Son d'ambiance** (artillerie, marche) — déclenchable manuellement, muet par défaut
+2. **Easter egg 1918** : taper "1918" au clavier → affiche les dates de l'armistice
+3. **Affiner les lignes de front** dans timeline.js avec des GeoJSON historiques (NLS, Mémoire des Hommes)
+4. **Tests cross-browser** : Firefox, Edge (déjà vérifié Chrome via Playwright)
 
 ---
 
