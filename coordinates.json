@@ -1,0 +1,233 @@
+{
+  "_meta": {
+    "format": "Leaflet [latitude, longitude]",
+    "source": "Wikipédia + atlas historiques 14-18. Vérifié manuellement pour précision Kaiserschlacht 1918.",
+    "rule": "Toujours utiliser ces coordonnées plutôt que d'en inventer. Si un lieu manque, demander à l'utilisateur ou ajouter au fichier."
+  },
+
+  "cities": {
+    "paris":              [48.8566, 2.3522],
+    "amiens":             [49.8950, 2.3022],
+    "arras":              [50.2910, 2.7778],
+    "saint_quentin":      [49.8489, 3.2876],
+    "reims":              [49.2583, 4.0317],
+    "verdun":             [49.1593, 5.3781],
+    "soissons":           [49.3815, 3.3236],
+    "doullens":           [50.1583, 2.3417],
+    "compiegne":          [49.4179, 2.8261],
+    "cambrai":            [50.1747, 3.2356],
+    "lille":              [50.6292, 3.0573],
+    "ypres":              [50.8503, 2.8853],
+    "armentieres":        [50.6852, 2.8819],
+    "hazebrouck":         [50.7269, 2.5404],
+    "chateau_thierry":    [49.0411, 3.4006],
+    "villers_cotterets":  [49.2553, 3.0903],
+    "noyon":              [49.5832, 3.0001],
+    "montdidier":         [49.6489, 2.5694],
+    "albert":             [50.0050, 2.6531],
+    "peronne":            [49.9281, 2.9332],
+    "la_fere":            [49.6614, 3.3672],
+    "craonne":            [49.4422, 3.7842],
+    "chemin_des_dames":   [49.4500, 3.7000],
+    "saint_mihiel":       [48.8889, 5.5444],
+    "rethondes":          [49.4253, 2.9056],
+    "compiegne_clairiere":[49.4267, 2.9078],
+    "epernay":            [49.0428, 3.9583],
+    "chalons_sur_marne":  [48.9569, 4.3636],
+    "dormans":            [49.0744, 3.6411],
+    "fismes":             [49.3072, 3.6817],
+    "bapaume":            [50.1078, 2.8517],
+    "ham":                [49.7456, 3.0719],
+    "ressons":            [49.5497, 2.7228],
+    "moreuil":            [49.7706, 2.4886],
+    "villers_bretonneux": [49.8689, 2.5167],
+    "kemmel":             [50.7800, 2.8167],
+    "merville":           [50.6464, 2.6411],
+    "bethune":            [50.5294, 2.6403],
+    "brest_port":         [48.3905, -4.4861],
+    "saint_nazaire_port": [47.2734, -2.2138],
+    "le_havre_port":      [49.4944, 0.1079],
+    "new_york":           [40.7128, -74.0060],
+    "berlin":             [52.5200, 13.4050],
+    "londres":            [51.5074, -0.1278],
+    "spa":                [50.4925, 5.8642],
+    "metz":               [49.1193, 6.1757],
+    "strasbourg":         [48.5734, 7.7521],
+    "moscou":             [55.7558, 37.6173],
+    "petrograd":          [59.9311, 30.3609],
+    "brest_litovsk":      [52.0976, 23.7341]
+  },
+
+  "qg": {
+    "spa_ludendorff": {
+      "name": "QG Spa — Ludendorff & Hindenburg",
+      "coords": [50.4925, 5.8642],
+      "from": "1918-03",
+      "color": "#c0392b"
+    },
+    "bombon_foch": {
+      "name": "QG Bombon (près Provins) — Foch",
+      "coords": [48.5469, 2.9786],
+      "from": "1918-04-03",
+      "color": "#3498db"
+    },
+    "compiegne_petain": {
+      "name": "QG Compiègne — Pétain (commandant en chef français)",
+      "coords": [49.4179, 2.8261],
+      "color": "#3498db"
+    },
+    "chaumont_pershing": {
+      "name": "QG Chaumont — Pershing (AEF)",
+      "coords": [48.1119, 5.1383],
+      "color": "#3498db"
+    },
+    "montreuil_haig": {
+      "name": "QG Montreuil-sur-Mer — Haig (BEF)",
+      "coords": [50.4639, 1.7619],
+      "color": "#3498db"
+    }
+  },
+
+  "operations": {
+    "michael": {
+      "name": "Opération Michael — la grande percée",
+      "dates": "21 mars → 5 avril 1918",
+      "secteur": "Picardie, entre Arras et La Fère",
+      "front_initial": [
+        [50.2910, 2.7778],
+        [50.1747, 3.2356],
+        [49.8489, 3.2876],
+        [49.6614, 3.3672]
+      ],
+      "front_final": [
+        [50.0050, 2.6531],
+        [49.9281, 2.9332],
+        [49.7706, 2.4886],
+        [49.6489, 2.5694]
+      ],
+      "axis_arrow": [
+        [49.8489, 3.2876],
+        [49.8950, 2.3022]
+      ],
+      "key_markers": ["saint_quentin", "amiens", "peronne", "albert", "montdidier"],
+      "view": { "center": [49.85, 2.8], "zoom": 9 }
+    },
+
+    "georgette": {
+      "name": "Opération Georgette — la Lys",
+      "dates": "9 → 29 avril 1918",
+      "secteur": "Flandres, vallée de la Lys",
+      "front_initial": [
+        [50.6852, 2.8819],
+        [50.6464, 2.6411],
+        [50.5294, 2.6403]
+      ],
+      "axis_arrow": [
+        [50.6852, 2.8819],
+        [50.7269, 2.5404]
+      ],
+      "key_markers": ["armentieres", "hazebrouck", "kemmel", "bethune", "ypres"],
+      "view": { "center": [50.7, 2.8], "zoom": 10 }
+    },
+
+    "blucher_yorck": {
+      "name": "Opération Blücher-Yorck — vers la Marne",
+      "dates": "27 mai → 6 juin 1918",
+      "secteur": "Chemin des Dames, Aisne, Marne",
+      "front_initial": [
+        [49.3815, 3.3236],
+        [49.4500, 3.7000],
+        [49.2583, 4.0317]
+      ],
+      "axis_arrow": [
+        [49.4500, 3.7000],
+        [49.0411, 3.4006]
+      ],
+      "key_markers": ["soissons", "chemin_des_dames", "reims", "chateau_thierry", "fismes"],
+      "view": { "center": [49.2, 3.6], "zoom": 9 }
+    },
+
+    "gneisenau": {
+      "name": "Opération Gneisenau — l'attaque oubliée",
+      "dates": "9 → 13 juin 1918",
+      "secteur": "Matz, entre Noyon et Montdidier",
+      "axis_arrow": [
+        [49.5832, 3.0001],
+        [49.6489, 2.5694]
+      ],
+      "key_markers": ["noyon", "montdidier", "ressons", "compiegne"],
+      "view": { "center": [49.6, 2.8], "zoom": 10 }
+    },
+
+    "friedensturm": {
+      "name": "Friedensturm — 2ᵉ bataille de la Marne",
+      "dates": "15 → 18 juillet 1918",
+      "secteur": "Champagne + saillant de la Marne",
+      "axis_arrow": [
+        [49.0411, 3.4006],
+        [48.85, 3.0]
+      ],
+      "counter_attack": {
+        "name": "Contre-attaque Mangin (18 juillet)",
+        "from": [49.2553, 3.0903],
+        "to": [49.0411, 3.4006],
+        "color": "#3498db"
+      },
+      "key_markers": ["chateau_thierry", "reims", "epernay", "villers_cotterets", "dormans"],
+      "view": { "center": [49.15, 3.5], "zoom": 9 }
+    }
+  },
+
+  "movements": {
+    "german_east_to_west": {
+      "description": "≈50 divisions allemandes libérées du front Est (Brest-Litovsk, 3 mars 1918) → front Ouest",
+      "from": [52.0976, 23.7341],
+      "to": [50.4925, 5.8642],
+      "via": [
+        [52.0976, 23.7341],
+        [52.2298, 21.0118],
+        [52.5200, 13.4050],
+        [50.4925, 5.8642]
+      ],
+      "color": "#c0392b",
+      "style": "dashed"
+    },
+    "us_reinforcements_atlantic": {
+      "description": "Renforts US Atlantique → ports français (1918, ~250k hommes/mois en pic)",
+      "from": [40.7128, -74.0060],
+      "to": [48.3905, -4.4861],
+      "color": "#3498db",
+      "style": "dashed"
+    },
+    "us_brest_to_front": {
+      "description": "Débarquement Brest → ligne de front",
+      "from": [48.3905, -4.4861],
+      "to": [48.1119, 5.1383],
+      "color": "#3498db",
+      "style": "dashed"
+    }
+  },
+
+  "events": {
+    "brest_litovsk_signature": {
+      "name": "Traité de Brest-Litovsk",
+      "date": "1918-03-03",
+      "coords": [52.0976, 23.7341]
+    },
+    "doullens_conference": {
+      "name": "Conférence de Doullens — Foch généralissime",
+      "date": "1918-03-26",
+      "coords": [50.1583, 2.3417]
+    },
+    "rethondes_armistice": {
+      "name": "Armistice de Rethondes (clairière de Compiègne)",
+      "date": "1918-11-11",
+      "coords": [49.4267, 2.9078]
+    },
+    "villers_cotterets_counter": {
+      "name": "Contre-offensive Villers-Cotterêts (Mangin)",
+      "date": "1918-07-18",
+      "coords": [49.2553, 3.0903]
+    }
+  }
+}

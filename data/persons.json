@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Erich Ludendorff",
+    "side": "allemand",
+    "role": "1er Quartier-maître général · cerveau de la Kaiserschlacht",
+    "bio": "Concepteur du plan d'offensives. Pari stratégique : briser les Alliés avant l'arrivée massive des Américains. Son échec entraînera sa démission le 26 octobre 1918.",
+    "img": "assets/img/persons/ludendorff.jpg",
+    "img_credit": "Bain News Service, vers 1918 — domaine public"
+  },
+  {
+    "name": "Paul von Hindenburg",
+    "side": "allemand",
+    "role": "Chef d'état-major général allemand · figure tutélaire",
+    "bio": "Vainqueur de Tannenberg en 1914. En 1918, c'est Ludendorff qui mène la guerre, mais le prestige d'Hindenburg légitime l'aventure.",
+    "img": "assets/img/persons/hindenburg.jpg",
+    "img_credit": "Bain News Service — domaine public"
+  },
+  {
+    "name": "Oskar von Hutier",
+    "side": "allemand",
+    "role": "Général · doctrine d'infiltration des Stoßtruppen",
+    "bio": "Commandant de la 18ᵉ armée. Sa tactique d'infiltration — héritée de Riga en septembre 1917 — devient le modèle des offensives de 1918.",
+    "img": "assets/img/persons/hutier.jpg",
+    "img_credit": "Bundesarchiv — usage libre"
+  },
+  {
+    "name": "Georg Bruchmüller",
+    "side": "allemand",
+    "role": "Colonel d'artillerie · « Durchbruchmüller »",
+    "bio": "Inventeur du barrage roulant court et précis. Le 21 mars, ses 6 000 canons tirent 1,1 million d'obus en 5 heures. Le prototype de la guerre d'artillerie moderne.",
+    "img": "assets/img/persons/bruchmuller.jpg",
+    "img_credit": "Bundesarchiv — usage libre"
+  },
+  {
+    "name": "Ferdinand Foch",
+    "side": "allié",
+    "role": "Généralissime des armées alliées (à partir du 26 mars 1918)",
+    "bio": "Nommé commandant en chef interallié à la conférence de Doullens — réponse directe à Michael. Architecte de la défense puis du retournement victorieux de 1918.",
+    "img": "assets/img/persons/foch.jpg",
+    "img_credit": "Agence Rol, 1918 — domaine public"
+  },
+  {
+    "name": "Philippe Pétain",
+    "side": "allié",
+    "role": "Commandant en chef des armées françaises",
+    "bio": "Architecte de la « défense élastique » : on évacue la première ligne avant le barrage allemand. Cette doctrine fait échouer le Friedensturm en Champagne (Gouraud).",
+    "img": "assets/img/persons/petain.jpg",
+    "img_credit": "Agence Meurisse, 1918 — domaine public"
+  },
+  {
+    "name": "Douglas Haig",
+    "side": "allié",
+    "role": "Commandant en chef du BEF (corps expéditionnaire britannique)",
+    "bio": "Le 11 avril 1918, en pleine offensive Georgette, il publie son ordre : « With our backs to the wall ». Tient le front malgré les pertes catastrophiques.",
+    "img": "assets/img/persons/haig.jpg",
+    "img_credit": "Bain News Service — domaine public"
+  },
+  {
+    "name": "John J. Pershing",
+    "side": "allié",
+    "role": "Commandant de l'AEF (American Expeditionary Forces)",
+    "bio": "Refuse l'amalgame des unités US dans les armées française et britannique. La 2ᵉ Division US stoppe Blücher-Yorck à Belleau et Château-Thierry (juin 1918).",
+    "img": "assets/img/persons/pershing.jpg",
+    "img_credit": "Bain News Service, 1918 — domaine public"
+  },
+  {
+    "name": "Charles Mangin",
+    "side": "allié",
+    "role": "Général · architecte de la contre-offensive du 18 juillet",
+    "bio": "Surnommé « le boucher », il dirige la 10ᵉ armée. Le 18 juillet 1918, ses 225 chars Renault FT surgissent de Villers-Cotterêts et brisent le saillant allemand de la Marne. Le tournant.",
+    "img": "assets/img/persons/mangin.jpg",
+    "img_credit": "Agence Rol, 1918 — domaine public"
+  }
+]

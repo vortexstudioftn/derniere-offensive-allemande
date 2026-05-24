@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="La dernière offensive Allemande — Kaiserschlacht, printemps 1918. Exposé d'histoire interactif." />
+  <title>La dernière offensive Allemande · Printemps 1918</title>
+
+  <!-- Polices -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Leaflet -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+
+  <!-- Styles du projet -->
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/sections.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION FLOTTANTE (chapitres)
+       ============================================================ -->
+  <nav class="chapter-nav" aria-label="Navigation des chapitres">
+    <ol>
+      <li><a href="#hook" data-chapter="0" class="active"><span>00</span> Ouverture</a></li>
+      <li><a href="#contexte" data-chapter="1"><span>01</span> Contexte</a></li>
+      <li><a href="#plan" data-chapter="2"><span>02</span> Plan Ludendorff</a></li>
+      <li><a href="#anatomie" data-chapter="3"><span>03</span> Anatomie</a></li>
+      <li><a href="#persos" data-chapter="4"><span>04</span> Personnages</a></li>
+      <li><a href="#batailles" data-chapter="5"><span>05</span> Les 4 batailles</a></li>
+      <li><a href="#friedensturm" data-chapter="6"><span>06</span> Friedensturm</a></li>
+      <li><a href="#bilan" data-chapter="7"><span>07</span> Bilan</a></li>
+    </ol>
+    <div class="chapter-nav__progress" aria-hidden="true"><span></span></div>
+  </nav>
+
+  <!-- ============================================================
+       SECTION 0 — HOOK
+       ============================================================ -->
+  <section id="hook" class="section section--hook" data-chapter="0">
+    <div class="hook__bg" aria-hidden="true"></div>
+    <div class="hook__inner">
+      <p class="hook__overline">21 mars 1918 — 4 h 40</p>
+      <h1 class="hook__counter">
+        <span class="counter" data-target="1100000" data-duration="3500">0</span>
+        <span class="hook__unit">obus</span>
+      </h1>
+      <p class="hook__subtitle">en 5 heures sur le front britannique.</p>
+      <p class="hook__lede">Bienvenue dans la <strong>dernière offensive Allemande</strong>.</p>
+
+      <p class="hook__scrollcue">Faites défiler ↓</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       IMAGE BLEED — Stoßtruppen Bundesarchiv
+       ============================================================ -->
+  <section class="image-bleed" aria-hidden="true">
+    <div class="image-bleed__img" style="background-image:url('assets/img/archive/sturmtruppen-21mars.jpg')"></div>
+    <div class="image-bleed__caption">
+      <p class="image-bleed__quote">« Le brouillard couvrit notre assaut. »</p>
+      <p class="image-bleed__credit">Stoßtruppen allemands sur le front Ouest, 1917 · Bundesarchiv Bild 183-R29825</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 1 — CONTEXTE
+       ============================================================ -->
+  <section id="contexte" class="section section--scroll" data-chapter="1">
+    <div class="scroll__sticky">
+      <div class="scroll__viz">
+        <div id="map-context" class="map" aria-label="Carte de l'Europe en 1918 montrant les flux de troupes"></div>
+      </div>
+    </div>
+
+    <div class="scroll__steps">
+      <article class="step" data-step="context-1">
+        <h2>1918 : la fenêtre s'entrouvre</h2>
+        <p>
+          Décembre 1917. À l'Est, la jeune Russie soviétique signe l'armistice.
+          Le <strong>traité de Brest-Litovsk</strong> (3 mars 1918) libère officiellement
+          l'Allemagne d'un front entier — et de près de <strong>50 divisions</strong>
+          immobilisées depuis 1914.
+        </p>
+      </article>
+
+      <article class="step" data-step="context-2">
+        <h2>Mais l'horloge américaine tourne</h2>
+        <p>
+          Avril 1917 : les États-Unis sont entrés en guerre.
+          Au printemps 1918, <strong>250 000 Doughboys débarquent chaque mois</strong>
+          dans les ports français. À l'été : 1 million d'Américains au front. À l'automne : 2 millions.
+        </p>
+      </article>
+
+      <article class="step" data-step="context-3">
+        <h2>Le pari de Ludendorff</h2>
+        <p>
+          Pour le <strong>général Erich Ludendorff</strong>, 1<sup>er</sup> Quartier-maître
+          général allemand, le calcul est brutal : <em>frapper avant l'été 1918</em>,
+          écraser les Britanniques et les Français avant que l'Amérique ne pèse vraiment.
+          Sinon, la guerre est perdue.
+        </p>
+      </article>
+
+      <article class="step" data-step="context-4">
+        <h2>Une dernière chance</h2>
+        <p>
+          C'est cette urgence stratégique qui va donner naissance à la
+          <strong>Kaiserschlacht</strong> — la <em>« bataille de l'Empereur »</em> —
+          quatre offensives massives en quatre mois, plus un dernier coup de dé en juillet.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       IMAGE BLEED — Signature Brest-Litovsk
+       ============================================================ -->
+  <section class="image-bleed image-bleed--right" aria-hidden="true">
+    <div class="image-bleed__img" style="background-image:url('assets/img/docs/brest-litovsk-signature.jpg')"></div>
+    <div class="image-bleed__caption">
+      <p class="image-bleed__quote">« Une paix séparée à l'Est. Cinquante divisions libérées. »</p>
+      <p class="image-bleed__credit">Signature du traité de Brest-Litovsk, 3 mars 1918</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 2 — LE PLAN LUDENDORFF
+       ============================================================ -->
+  <section id="plan" class="section section--plan" data-chapter="2">
+    <div class="container">
+      <p class="section__overline">Chapitre 02</p>
+      <h2 class="section__title">Le plan Ludendorff</h2>
+      <p class="section__lede">Une doctrine tactique nouvelle pour un dernier va-tout.</p>
+
+      <div class="plan-grid">
+        <div class="plan-card">
+          <p class="plan-card__num">01</p>
+          <h3>Frapper la <em>soudure</em></h3>
+          <p>
+            Attaquer la jonction entre l'armée britannique (au nord) et française
+            (au sud) — point de friction politique et logistique. Repousser les
+            Britanniques vers la Manche, séparer les deux armées.
+          </p>
+        </div>
+
+        <div class="plan-card">
+          <p class="plan-card__num">02</p>
+          <h3>Les <em>Stoßtruppen</em></h3>
+          <p>
+            Troupes d'assaut formées à l'infiltration : avancer en petits groupes
+            mobiles, contourner les points forts, laisser l'infanterie classique
+            les réduire ensuite. Rupture avec les vagues d'assaut frontales.
+          </p>
+        </div>
+
+        <div class="plan-card">
+          <p class="plan-card__num">03</p>
+          <h3>L'artillerie <em>Bruchmüller</em></h3>
+          <p>
+            Le colonel Georg Bruchmüller, surnommé <em>« Durchbruchmüller »</em>
+            (« Müller-la-percée »), met au point un barrage court, intense,
+            mélange explosifs + gaz, sans préparation longue. Effet de surprise total.
+          </p>
+        </div>
+
+        <div class="plan-card">
+          <p class="plan-card__num">04</p>
+          <h3>Quatre opérations enchaînées</h3>
+          <p>
+            <strong>Michael</strong> (mars), <strong>Georgette</strong> (avril),
+            <strong>Blücher-Yorck</strong> (mai), <strong>Gneisenau</strong> (juin) —
+            puis le coup de grâce : le <strong>Friedensturm</strong> (juillet).
+          </p>
+        </div>
+      </div>
+
+      <p class="plan-quote">
+        « <em>Wir hauen ein Loch — das Übrige findet sich.</em> »<br />
+        <span>« On perce un trou — le reste suivra. » — Ludendorff, janvier 1918</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 3 — ANATOMIE DE L'OFFENSIVE (carte interactive slider)
+       ============================================================ -->
+  <section id="anatomie" class="section section--anatomie" data-chapter="3">
+    <div class="anatomie__sticky">
+      <div id="map-timeline" class="map" aria-label="Carte interactive montrant l'évolution du front Ouest de mars à novembre 1918"></div>
+
+      <!-- Header flottant : date + titre + sous-titre -->
+      <header class="anatomie__header">
+        <p class="anatomie__overline">Chapitre 03 · Anatomie de l'offensive</p>
+        <p class="anatomie__date" id="timeline-date">20 mars 1918</p>
+        <h2 class="anatomie__title" id="timeline-title">La veille</h2>
+        <p class="anatomie__sub" id="timeline-sub">Le front Ouest est figé depuis quatre ans.</p>
+        <p class="anatomie__hint">Déplace le curseur ↓ ou clique sur une date.</p>
+      </header>
+
+      <!-- Slider en bas -->
+      <div class="anatomie__controls">
+        <div class="anatomie__ticks" id="timeline-ticks"></div>
+        <input type="range" class="anatomie__slider" id="timeline-slider" min="0" max="11" value="0" step="1" aria-label="Curseur temporel" />
+        <div class="anatomie__bounds">
+          <span>21 MARS 1918</span>
+          <span>11 NOVEMBRE 1918</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 4 — PERSONNAGES
+       ============================================================ -->
+  <section id="persos" class="section section--persos" data-chapter="4">
+    <div class="container">
+      <p class="section__overline">Chapitre 03</p>
+      <h2 class="section__title">Les visages de l'offensive</h2>
+      <p class="section__lede">Les hommes qui ont conçu, subi et brisé la Kaiserschlacht.</p>
+
+      <div class="persons-grid" id="persons-grid">
+        <!-- Rempli dynamiquement depuis data/persons.json -->
+      </div>
+
+      <!-- Vitrail commémoratif de Doullens -->
+      <div class="doullens-memorial">
+        <div class="doullens-memorial__img">
+          <img src="assets/img/archive/foch-doullens.jpg" alt="Vitrail commémoratif de la conférence de Doullens, 26 mars 1918" loading="lazy">
+        </div>
+        <div class="doullens-memorial__text">
+          <p class="doullens-memorial__overline">Objet de mémoire</p>
+          <h3>Le vitrail de Doullens</h3>
+          <p>
+            Le <strong>26 mars 1918</strong>, en pleine débâcle face à Michael, les Alliés
+            se réunissent en urgence à <strong>Doullens</strong>. Décision historique :
+            <strong>Ferdinand Foch</strong> devient généralissime interallié — un seul
+            chef pour coordonner Français, Britanniques et Américains. Ce vitrail
+            commémoratif immortalise l'instant qui a changé le cours de la guerre.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 4 — LES 4 BATAILLES
+       ============================================================ -->
+  <section id="batailles" class="section section--battles" data-chapter="5">
+    <div class="container">
+      <p class="section__overline">Chapitre 04</p>
+      <h2 class="section__title">Quatre coups, quatre échecs</h2>
+      <p class="section__lede">Mars → juin 1918. Chaque opération devait être <em>la</em> percée décisive.</p>
+    </div>
+
+    <!-- Bataille 1 : MICHAEL -->
+    <div class="battle" id="battle-michael">
+      <div class="battle__sticky">
+        <div id="map-michael" class="map" aria-label="Carte de l'opération Michael, 21 mars - 5 avril 1918"></div>
+      </div>
+      <div class="battle__steps">
+        <article class="step step--battle">
+          <p class="battle__codename">Opération MICHAEL</p>
+          <h3>La grande percée</h3>
+          <p class="battle__dates">21 mars → 5 avril 1918 · Picardie</p>
+        </article>
+        <article class="step step--battle">
+          <p>
+            À 4 h 40, le 21 mars 1918, <strong>6 000 canons</strong> ouvrent le feu.
+            <strong>1,1 million d'obus</strong> en cinq heures, explosifs et gaz mêlés.
+            Le brouillard couvre l'assaut. La 5<sup>e</sup> armée britannique s'effondre.
+          </p>
+        </article>
+        <article class="step step--battle">
+          <p>
+            En deux semaines, les Allemands avancent de <strong>60 kilomètres</strong> —
+            la plus grande percée du front Ouest depuis 1914. Ils visent Amiens, nœud
+            ferroviaire vital. Mais l'épuisement et la logistique étirée freinent l'élan.
+          </p>
+        </article>
+        <article class="step step--battle">
+          <p>
+            <strong>26 mars 1918 — Doullens.</strong> Sous le choc, Alliés nomment
+            <strong>Foch généralissime interallié</strong>. Pour la première fois, un seul
+            chef commande à la fois Français, Britanniques et Américains. L'offensive
+            allemande vient de créer son pire ennemi.
+          </p>
+        </article>
+      </div>
+    </div>
+
+    <!-- Bataille 2 : GEORGETTE -->
+    <div class="battle" id="battle-georgette">
+      <div class="battle__sticky">
+        <div id="map-georgette" class="map" aria-label="Carte de l'opération Georgette, 9-29 avril 1918"></div>
+      </div>
+      <div class="battle__steps">
+        <article class="step step--battle">
+          <p class="battle__codename">Opération GEORGETTE</p>
+          <h3>Coup au nord</h3>
+          <p class="battle__dates">9 → 29 avril 1918 · Flandres / Lys</p>
+        </article>
+        <article class="step step--battle">
+          <p>
+            Ludendorff frappe maintenant en Flandres, sur la rivière Lys, pour pousser
+            les Britanniques vers la Manche. La situation est si critique que Haig publie son
+            ordre du jour fameux : « <em>Back to the wall</em> — les yeux dans les yeux,
+            chacun doit combattre jusqu'au bout. »
+          </p>
+        </article>
+        <article class="step step--battle">
+          <p>
+            Gain : ~20 km. Aucune percée stratégique. L'offensive est arrêtée le 29 avril.
+            <strong>Premier échec partiel</strong> — mais l'usure côté allemand commence.
+          </p>
+        </article>
+      </div>
+    </div>
+
+    <!-- Bloc dramatique — Ordre de Haig -->
+    <div class="image-bleed backs-to-wall">
+      <div class="backs-to-wall__content">
+        <blockquote class="backs-to-wall__quote">
+          <p>With our backs to the wall and believing in the justice of our cause, each one of us must fight on to the end.</p>
+        </blockquote>
+        <cite class="backs-to-wall__cite">
+          — Field Marshal Sir Douglas Haig<br>
+          <span>Ordre du jour, 11 avril 1918</span>
+        </cite>
+      </div>
+    </div>
+
+    <!-- Bataille 3 : BLÜCHER-YORCK -->
+    <div class="battle" id="battle-blucher">
+      <div class="battle__sticky">
+        <div id="map-blucher" class="map" aria-label="Carte de l'opération Blücher-Yorck, 27 mai - 6 juin 1918"></div>
+      </div>
+      <div class="battle__steps">
+        <article class="step step--battle">
+          <p class="battle__codename">Opération BLÜCHER-YORCK</p>
+          <h3>Aux portes de Paris</h3>
+          <p class="battle__dates">27 mai → 6 juin 1918 · Chemin des Dames → Marne</p>
+        </article>
+        <article class="step step--battle">
+          <p>
+            La diversion devient triomphe : le Chemin des Dames cède en quelques heures.
+            En une semaine, les Allemands avancent de <strong>60 km</strong> et atteignent
+            <strong>Château-Thierry sur la Marne</strong>, à 90 km de Paris. Le gouvernement
+            envisage d'évacuer la capitale.
+          </p>
+        </article>
+        <article class="step step--battle">
+          <p>
+            Mais la <strong>2<sup>e</sup> division US</strong> (Belleau Wood, Château-Thierry)
+            stoppe l'avance. Le « saillant de la Marne » est créé — magnifique sur la carte,
+            cauchemardesque à défendre. Ludendorff vient de tendre la gorge à Foch.
+          </p>
+        </article>
+      </div>
+    </div>
+
+    <!-- Bataille 4 : GNEISENAU -->
+    <div class="battle" id="battle-gneisenau">
+      <div class="battle__sticky">
+        <div id="map-gneisenau" class="map" aria-label="Carte de l'opération Gneisenau, 9-13 juin 1918"></div>
+      </div>
+      <div class="battle__steps">
+        <article class="step step--battle">
+          <p class="battle__codename">Opération GNEISENAU</p>
+          <h3>L'élan brisé</h3>
+          <p class="battle__dates">9 → 13 juin 1918 · Montdidier — Noyon</p>
+        </article>
+        <article class="step step--battle">
+          <p>
+            Cette fois, Foch est prêt. La <strong>défense élastique</strong> (Pétain) absorbe
+            le choc. Une <strong>contre-attaque franco-américaine</strong> menée par le général
+            Mangin stoppe net l'avance à <strong>8 kilomètres</strong>.
+          </p>
+        </article>
+        <article class="step step--battle">
+          <p>
+            Quatre opérations, quatre échecs stratégiques. L'armée allemande a perdu
+            <strong>près de 600 000 hommes</strong> en trois mois. Ses Stoßtruppen,
+            les meilleures unités, sont saignées. Et pourtant, Ludendorff prépare un dernier coup.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 5 — FRIEDENSTURM (le tournant)
+       ============================================================ -->
+  <section id="friedensturm" class="section section--scroll section--friedensturm" data-chapter="6">
+    <div class="scroll__sticky">
+      <div class="scroll__viz">
+        <div id="map-friedensturm" class="map" aria-label="Carte du Friedensturm et de la contre-offensive du 18 juillet 1918"></div>
+      </div>
+    </div>
+
+    <div class="scroll__steps">
+      <article class="step">
+        <p class="battle__codename">FRIEDENSTURM</p>
+        <h2>L'offensive « de la paix »</h2>
+        <p class="battle__dates">15 → 17 juillet 1918 · Champagne / Marne</p>
+      </article>
+
+      <article class="step">
+        <p>
+          Le nom est tragiquement ironique. Ludendorff baptise ce coup
+          <em>« offensive pour la paix »</em> — la dernière, censée forcer les Alliés
+          à négocier. Plan : attaquer de part et d'autre de Reims pour encercler la ville
+          et couper le front français en deux.
+        </p>
+      </article>
+
+      <article class="step">
+        <p>
+          Mais Foch sait. Le renseignement français a capté les préparatifs. En Champagne,
+          le général <strong>Gouraud</strong> applique la <strong>défense élastique</strong> :
+          il évacue la première ligne. Le déluge allemand tombe… sur du vide.
+        </p>
+      </article>
+
+      <article class="step">
+        <p>
+          <strong>18 juillet 1918 — Villers-Cotterêts.</strong>
+          À l'aube, sans préparation d'artillerie, <strong>225 chars Renault FT</strong>
+          surgissent de la forêt avec la <strong>10<sup>e</sup> armée du général Mangin</strong>.
+          Le saillant de la Marne est attaqué par surprise sur son flanc ouest.
+        </p>
+      </article>
+
+      <article class="step">
+        <p>
+          C'est <strong>le tournant absolu de la guerre</strong>. À partir de ce jour,
+          l'armée allemande ne fait plus que reculer. <strong>8 août 1918</strong> :
+          « <em>Schwarzer Tag</em> » à Amiens. <strong>11 novembre 1918</strong> :
+          armistice de Rethondes. La Kaiserschlacht a tué l'Allemagne impériale.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       IMAGE BLEED — Chars Renault FT
+       ============================================================ -->
+  <section class="image-bleed" aria-hidden="true">
+    <div class="image-bleed__img" style="background-image:url('assets/img/archive/chars-renault-ft.jpg')"></div>
+    <div class="image-bleed__caption">
+      <p class="image-bleed__quote">« 225 chars surgirent de la forêt à l'aube. »</p>
+      <p class="image-bleed__credit">Char Renault FT en action, 1918 — l'arme du tournant du 18 juillet</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 7 — BILAN
+       ============================================================ -->
+  <section id="bilan" class="section section--bilan" data-chapter="7">
+    <div class="container">
+      <p class="section__overline">Chapitre 06</p>
+      <h2 class="section__title">Le calcul du pari raté</h2>
+
+      <div class="stats-grid">
+        <div class="stat">
+          <p class="stat__num"><span class="counter" data-target="688000">0</span></p>
+          <p class="stat__label">pertes allemandes (mars → juillet 1918)</p>
+        </div>
+        <div class="stat">
+          <p class="stat__num"><span class="counter" data-target="863000">0</span></p>
+          <p class="stat__label">pertes alliées (mars → juillet 1918)</p>
+        </div>
+        <div class="stat">
+          <p class="stat__num"><span class="counter" data-target="120">0</span> <span class="stat__unit">jours</span></p>
+          <p class="stat__label">entre la première percée et l'effondrement</p>
+        </div>
+        <div class="stat">
+          <p class="stat__num"><span class="counter" data-target="11" data-suffix=" nov.">0</span></p>
+          <p class="stat__label">l'armistice signé à Rethondes</p>
+        </div>
+      </div>
+
+      <div class="conclusion">
+        <p>
+          La <strong>Kaiserschlacht</strong> n'aura été ni l'effondrement attendu des Alliés,
+          ni la victoire éclair rêvée par Ludendorff. Elle aura été
+          <strong>le suicide tactique de l'Allemagne impériale</strong> :
+          en consumant ses meilleures troupes — les Stoßtruppen — sur des objectifs
+          stratégiques flous, le haut commandement allemand a précipité l'effondrement
+          qu'il voulait éviter.
+        </p>
+        <p>
+          Le 9 novembre 1918, Guillaume II abdique. Le 11, l'armistice est signé.
+          La <strong>République de Weimar</strong> naît dans les ruines de l'offensive
+          qui devait sauver le Reich.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       IMAGE BLEED — Armistice de Rethondes
+       ============================================================ -->
+  <section class="image-bleed image-bleed--right" aria-hidden="true">
+    <div class="image-bleed__img" style="background-image:url('assets/img/docs/armistice-rethondes.jpg')"></div>
+    <div class="image-bleed__caption">
+      <p class="image-bleed__quote">« 11 novembre 1918 — 11 heures. »</p>
+      <p class="image-bleed__credit">Wagon de Rethondes · armistice de la Première Guerre mondiale</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 8 — SOURCES
+       ============================================================ -->
+  <section id="sources" class="section section--sources">
+    <div class="container">
+      <h2 class="section__title section__title--small">Sources & bibliographie</h2>
+      <ul class="sources-list">
+        <li>EHNE / Eduscol — <em>Mars 1918, la dernière offensive allemande</em> (programme Première Générale)</li>
+        <li>Wikipédia FR — <em>Offensive du Printemps</em>, <em>Bataille de la Marne (1918)</em></li>
+        <li>Chemins de mémoire (Min. des Armées) — Friedensturm / Seconde bataille de la Marne</li>
+        <li>ECPAD — fonds photographiques et cinématographiques</li>
+        <li>Mémoire des Hommes (SHD) — JMO des unités engagées</li>
+        <li>National WWI Museum (Kansas City) — cartes animées 1914-1918</li>
+        <li>The Map as History — cartographie pédagogique de la Première Guerre mondiale</li>
+      </ul>
+      <p class="credits">
+        Exposé d'histoire · Première Générale · Mai 2026<br />
+        Présentation construite avec HTML, Leaflet.js et GSAP.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
+  <!-- Leaflet -->
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  <!-- Données inline (fallback pour ouverture en file://) -->
+  <script>
+    window.__PERSONS_FALLBACK__ = [
+      {"name":"Erich Ludendorff","side":"allemand","role":"1er Quartier-maître général · cerveau de la Kaiserschlacht","bio":"Concepteur du plan d'offensives. Pari stratégique : briser les Alliés avant l'arrivée massive des Américains. Son échec entraînera sa démission le 26 octobre 1918.","img":"assets/img/persons/ludendorff.jpg"},
+      {"name":"Paul von Hindenburg","side":"allemand","role":"Chef d'état-major général allemand · figure tutélaire","bio":"Vainqueur de Tannenberg en 1914. En 1918, c'est Ludendorff qui mène la guerre, mais le prestige d'Hindenburg légitime l'aventure.","img":"assets/img/persons/hindenburg.jpg"},
+      {"name":"Oskar von Hutier","side":"allemand","role":"Général · doctrine d'infiltration des Stoßtruppen","bio":"Commandant de la 18ᵉ armée. Sa tactique d'infiltration — héritée de Riga en septembre 1917 — devient le modèle des offensives de 1918.","img":"assets/img/persons/hutier.jpg"},
+      {"name":"Georg Bruchmüller","side":"allemand","role":"Colonel d'artillerie · « Durchbruchmüller »","bio":"Inventeur du barrage roulant court et précis. Le 21 mars, ses 6 000 canons tirent 1,1 million d'obus en 5 heures. Le prototype de la guerre d'artillerie moderne.","img":"assets/img/persons/bruchmuller.jpg"},
+      {"name":"Ferdinand Foch","side":"allié","role":"Généralissime des armées alliées (à partir du 26 mars 1918)","bio":"Nommé commandant en chef interallié à la conférence de Doullens — réponse directe à Michael. Architecte de la défense puis du retournement victorieux de 1918.","img":"assets/img/persons/foch.jpg"},
+      {"name":"Philippe Pétain","side":"allié","role":"Commandant en chef des armées françaises","bio":"Architecte de la « défense élastique » : on évacue la première ligne avant le barrage allemand. Cette doctrine fait échouer le Friedensturm en Champagne (Gouraud).","img":"assets/img/persons/petain.jpg"},
+      {"name":"Douglas Haig","side":"allié","role":"Commandant en chef du BEF (corps expéditionnaire britannique)","bio":"Le 11 avril 1918, en pleine offensive Georgette, il publie son ordre : « With our backs to the wall ». Tient le front malgré les pertes catastrophiques.","img":"assets/img/persons/haig.jpg"},
+      {"name":"John J. Pershing","side":"allié","role":"Commandant de l'AEF (American Expeditionary Forces)","bio":"Refuse l'amalgame des unités US dans les armées française et britannique. La 2ᵉ Division US stoppe Blücher-Yorck à Belleau et Château-Thierry (juin 1918).","img":"assets/img/persons/pershing.jpg"},
+      {"name":"Charles Mangin","side":"allié","role":"Général · architecte de la contre-offensive du 18 juillet","bio":"Surnommé « le boucher », il dirige la 10ᵉ armée. Le 18 juillet 1918, ses 225 chars Renault FT surgissent de Villers-Cotterêts et brisent le saillant allemand de la Marne. Le tournant.","img":"assets/img/persons/mangin.jpg"}
+    ];
+  </script>
+
+  <!-- Scripts du projet -->
+  <script src="js/counters.js"></script>
+  <script src="js/scrollytelling.js"></script>
+  <script src="js/maps/_map-helpers.js"></script>
+  <script src="js/maps/context.js"></script>
+  <script src="js/maps/timeline.js"></script>
+  <script src="js/maps/michael.js"></script>
+  <script src="js/maps/georgette.js"></script>
+  <script src="js/maps/blucher.js"></script>
+  <script src="js/maps/gneisenau.js"></script>
+  <script src="js/maps/friedensturm.js"></script>
+  <script src="js/persons.js"></script>
+  <script src="js/presentation.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

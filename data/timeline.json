@@ -1,0 +1,110 @@
+[
+  {
+    "date": "1918-03-20",
+    "label": "20 mars 1918",
+    "title": "La veille",
+    "subtitle": "Le front Ouest est figé depuis 1914.",
+    "front": "stable",
+    "arrows": [],
+    "highlight": null
+  },
+  {
+    "date": "1918-03-21",
+    "label": "21 mars 1918",
+    "title": "Opération MICHAEL",
+    "subtitle": "1,1 million d'obus en 5 heures. La 5ᵉ armée britannique s'effondre.",
+    "front": "michael_start",
+    "arrows": ["michael"],
+    "highlight": "Amiens"
+  },
+  {
+    "date": "1918-04-05",
+    "label": "5 avril 1918",
+    "title": "Michael s'épuise",
+    "subtitle": "60 km gagnés, Amiens tient. La logistique allemande est dépassée.",
+    "front": "michael_end",
+    "arrows": ["michael"],
+    "highlight": "Amiens"
+  },
+  {
+    "date": "1918-04-09",
+    "label": "9 avril 1918",
+    "title": "Opération GEORGETTE",
+    "subtitle": "Ludendorff frappe en Flandres. Haig : « With our backs to the wall ».",
+    "front": "georgette",
+    "arrows": ["michael", "georgette"],
+    "highlight": "Ypres"
+  },
+  {
+    "date": "1918-05-27",
+    "label": "27 mai 1918",
+    "title": "Opération BLÜCHER-YORCK",
+    "subtitle": "Le Chemin des Dames tombe en 6 heures. Direction la Marne.",
+    "front": "blucher_start",
+    "arrows": ["blucher"],
+    "highlight": "Chemin des Dames"
+  },
+  {
+    "date": "1918-06-03",
+    "label": "3 juin 1918",
+    "title": "Aux portes de Paris",
+    "subtitle": "Les Allemands atteignent Château-Thierry, à 90 km de Paris.",
+    "front": "blucher_end",
+    "arrows": ["blucher"],
+    "highlight": "Château-Thierry"
+  },
+  {
+    "date": "1918-06-09",
+    "label": "9 juin 1918",
+    "title": "Opération GNEISENAU",
+    "subtitle": "Foch est prêt. Mangin contre-attaque. L'avance s'arrête à 8 km.",
+    "front": "gneisenau",
+    "arrows": ["gneisenau"],
+    "highlight": "Compiègne"
+  },
+  {
+    "date": "1918-07-15",
+    "label": "15 juillet 1918",
+    "title": "FRIEDENSTURM",
+    "subtitle": "« L'offensive de la paix ». Gouraud applique la défense élastique : l'attaque tombe dans le vide.",
+    "front": "friedensturm",
+    "arrows": ["friedensturm"],
+    "highlight": "Reims"
+  },
+  {
+    "date": "1918-07-18",
+    "label": "18 juillet 1918",
+    "title": "Le tournant — Villers-Cotterêts",
+    "subtitle": "À l'aube : 225 chars Renault FT, Mangin attaque par surprise. Le saillant cède.",
+    "front": "counter_marne",
+    "arrows": ["counterattack"],
+    "highlight": "Villers-Cotterêts"
+  },
+  {
+    "date": "1918-08-08",
+    "label": "8 août 1918",
+    "title": "« Schwarzer Tag »",
+    "subtitle": "Le « jour noir » de l'armée allemande à Amiens. Le moral s'effondre.",
+    "front": "amiens",
+    "arrows": ["amiens"],
+    "highlight": "Amiens"
+  },
+  {
+    "date": "1918-09-26",
+    "label": "26 septembre 1918",
+    "title": "Offensive Meuse-Argonne",
+    "subtitle": "Foch lance l'offensive générale alliée. La ligne Hindenburg craque.",
+    "front": "retreat_1",
+    "arrows": ["meuse_argonne"],
+    "highlight": null
+  },
+  {
+    "date": "1918-11-11",
+    "label": "11 novembre 1918",
+    "title": "Armistice",
+    "subtitle": "Wagon de Rethondes, 5 h 15. Cessez-le-feu à 11 h. L'Allemagne impériale est morte.",
+    "front": "armistice",
+    "arrows": [],
+    "highlight": "Rethondes"
+  }
+]
