@@ -1,5 +1,6 @@
 /* ============================================================
    CARTE OPÉRATION GEORGETTE — 9 - 29 avril 1918 · Flandres
+   Coordonnées vérifiées OSM Nominatim + Wikipedia (mai 2026)
    ============================================================ */
 (function () {
   document.addEventListener('DOMContentLoaded', () => {
@@ -7,8 +8,8 @@
     if (!container || typeof L === 'undefined' || !window.MapFX) return;
 
     const map = L.map('map-georgette', {
-      center: [50.69, 2.85],
-      zoom: 9,
+      center: [50.69, 2.80],
+      zoom: 10,
       zoomControl: false,
       scrollWheelZoom: false, dragging: false,
       doubleClickZoom: false, touchZoom: false, keyboard: false,
@@ -17,27 +18,45 @@
 
     MapFX.darkTiles().addTo(map);
 
-    // Front initial avant attaque
+    // Front initial (nord → sud)
     L.polyline(
-      [[50.8503, 2.8853], [50.6852, 2.8819], [50.5294, 2.6403]],
-      { color: '#ffffff', weight: 2, opacity: 0.4, dashArray: '4 6' }
+      [
+        [50.8522, 2.8846],  // Ypres
+        [50.7857, 2.8826],  // Wytschaete
+        [50.7598, 2.8998],  // Messines
+        [50.6867, 2.8822],  // Armentières
+        [50.5839, 2.7799],  // Neuve-Chapelle
+        [50.5316, 2.8047],  // La Bassée
+      ],
+      { color: '#ffffff', weight: 2, opacity: 0.5, dashArray: '4 6' }
     ).addTo(map);
 
-    // Attaques sur la Lys (2 axes)
-    [
-      [[50.78, 3.10], [50.72, 2.92], [50.68, 2.78]],
-      [[50.55, 3.05], [50.55, 2.85], [50.58, 2.62]],
-    ].forEach((p, i) => {
-      MapFX.animatedPolyline(p, {
-        color: '#c0392b', weight: 5, duration: 1.8, delay: 0.4 + i * 0.3,
-      }).addTo(map);
-    });
+    // Attaque nord (vallée de la Lys)
+    MapFX.animatedPolyline(
+      [[50.6867, 2.8822], [50.6440, 2.7227], [50.6437, 2.6387]],
+      { color: '#c0392b', weight: 5, duration: 1.8, delay: 0.4 }
+    ).addTo(map);
+
+    // Attaque sud (La Bassée → Locon)
+    MapFX.animatedPolyline(
+      [[50.5316, 2.8047], [50.5707, 2.6665], [50.5839, 2.7799]],
+      { color: '#c0392b', weight: 5, duration: 1.8, delay: 0.7 }
+    ).addTo(map);
+
+    // Poussée vers Kemmel (haute importance)
+    MapFX.animatedPolyline(
+      [[50.7598, 2.8998], [50.7790, 2.8130], [50.7397, 2.7349]],
+      { color: '#c0392b', weight: 4, duration: 1.5, delay: 1.2 }
+    ).addTo(map);
 
     [
-      { name: 'Ypres',        coord: [50.8503, 2.8853], note: 'Verrou britannique — tient',     side: 'allied', big: true },
-      { name: 'Armentières',  coord: [50.6852, 2.8819], note: 'Tombée le 11 avril 1918',         side: 'german' },
-      { name: 'La Bassée',    coord: [50.5294, 2.6403], note: 'Aile sud allemande',              side: 'german' },
-      { name: 'Hazebrouck',   coord: [50.7269, 2.5404], note: 'Objectif final non atteint',      side: 'allied' },
+      { name: 'Ypres',         coord: [50.8522, 2.8846], note: 'Verrou britannique — tient',        side: 'allied', big: true },
+      { name: 'Armentières',   coord: [50.6867, 2.8822], note: 'Tombée le 11 avril 1918',            side: 'german' },
+      { name: 'La Bassée',     coord: [50.5316, 2.8047], note: 'Aile sud allemande',                 side: 'german' },
+      { name: 'Hazebrouck',    coord: [50.7226, 2.5360], note: 'Objectif final non atteint',         side: 'allied' },
+      { name: 'Bailleul',      coord: [50.7397, 2.7349], note: 'Prise le 15 avril',                  side: 'german' },
+      { name: 'Mont Kemmel',   coord: [50.7790, 2.8130], note: 'Hauteur clé — prise le 25 avril',   side: 'german' },
+      { name: 'Merville',      coord: [50.6437, 2.6387], note: 'Prise — avance vers Hazebrouck',    side: 'german' },
     ].forEach((c) => {
       MapFX.pulseMarker(c.coord, {
         color: c.side === 'german' ? '#c0392b' : '#3a6b8c',

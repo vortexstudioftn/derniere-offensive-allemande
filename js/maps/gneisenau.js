@@ -1,6 +1,7 @@
 /* ============================================================
    CARTE OPÉRATION GNEISENAU — 9 - 13 juin 1918
    Montdidier - Noyon · arrêté par Mangin
+   Coordonnées vérifiées OSM Nominatim + Wikipedia (mai 2026)
    ============================================================ */
 (function () {
   document.addEventListener('DOMContentLoaded', () => {
@@ -8,8 +9,8 @@
     if (!container || typeof L === 'undefined' || !window.MapFX) return;
 
     const map = L.map('map-gneisenau', {
-      center: [49.55, 2.8],
-      zoom: 9,
+      center: [49.55, 2.78],
+      zoom: 10,
       zoomControl: false,
       scrollWheelZoom: false, dragging: false,
       doubleClickZoom: false, touchZoom: false, keyboard: false,
@@ -18,31 +19,40 @@
 
     MapFX.darkTiles().addTo(map);
 
+    // Front initial (Montdidier → Noyon via Ressons)
     L.polyline(
-      [[49.6489, 2.5694], [49.5832, 3.0001]],
-      { color: '#ffffff', weight: 2, opacity: 0.4, dashArray: '4 6' }
+      [
+        [49.6486, 2.5708],  // Montdidier
+        [49.5394, 2.7448],  // Ressons-sur-Matz
+        [49.5107, 2.9231],  // Ribécourt
+        [49.5806, 3.0000],  // Noyon
+      ],
+      { color: '#ffffff', weight: 2, opacity: 0.5, dashArray: '4 6' }
     ).addTo(map);
 
-    // Attaque allemande (limitée)
-    [
-      [[49.6, 2.93], [49.6, 2.75], [49.6, 2.6]],
-      [[49.55, 2.95], [49.55, 2.78], [49.55, 2.65]],
-    ].forEach((p, i) => {
-      MapFX.animatedPolyline(p, {
-        color: '#c0392b', weight: 5, duration: 1.6, delay: 0.3 + i * 0.25,
-      }).addTo(map);
-    });
-
-    // Contre-attaque Mangin (bleue, dashed) — délai pour effet "puis ça réplique"
+    // Attaque allemande (2 axes)
     MapFX.animatedPolyline(
-      [[49.45, 2.5], [49.5, 2.65], [49.55, 2.78]],
+      [[49.5806, 3.0000], [49.5394, 2.7448], [49.5107, 2.9231]],
+      { color: '#c0392b', weight: 5, duration: 1.6, delay: 0.3 }
+    ).addTo(map);
+
+    MapFX.animatedPolyline(
+      [[49.6486, 2.5708], [49.5394, 2.7448]],
+      { color: '#c0392b', weight: 5, duration: 1.4, delay: 0.55 }
+    ).addTo(map);
+
+    // Contre-attaque Mangin (11 juin) — bleue, délai plus long
+    MapFX.animatedPolyline(
+      [[49.4179, 2.8261], [49.5107, 2.9231], [49.5394, 2.7448]],
       { color: '#3a6b8c', weight: 5, duration: 1.6, delay: 1.5 }
     ).addTo(map);
 
     [
-      { name: 'Montdidier', coord: [49.6489, 2.5694], note: 'Aile ouest allemande',          side: 'german' },
-      { name: 'Noyon',      coord: [49.5832, 3.0001], note: 'Point de départ allemand',      side: 'german' },
-      { name: 'Compiègne',  coord: [49.4179, 2.8261], note: 'QG Mangin · contre-attaque',    side: 'allied', big: true },
+      { name: 'Montdidier',       coord: [49.6486, 2.5708], note: 'Aile ouest allemande',              side: 'german' },
+      { name: 'Noyon',            coord: [49.5806, 3.0000], note: 'Point de départ allemand',           side: 'german' },
+      { name: 'Ressons-sur-Matz', coord: [49.5394, 2.7448], note: 'Centre de l\'attaque',              side: 'german' },
+      { name: 'Ribécourt',        coord: [49.5107, 2.9231], note: 'Secteur est',                       side: 'german' },
+      { name: 'Compiègne',        coord: [49.4179, 2.8261], note: 'Mangin · contre-attaque du 11 juin', side: 'allied', big: true },
     ].forEach((c) => {
       MapFX.pulseMarker(c.coord, {
         color: c.side === 'german' ? '#c0392b' : '#3a6b8c',

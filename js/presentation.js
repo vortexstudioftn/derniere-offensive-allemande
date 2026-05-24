@@ -20,7 +20,7 @@
     { id: 'contexte',      stepCount: 4, label: 'Contexte', stepIdPrefix: 'context-' }, // context-1 à context-4
     { id: 'plan',          stepCount: 1, label: 'Plan Ludendorff' },
     { id: 'anatomie',      stepCount: 12, label: 'Anatomie' }, // 12 dates du slider
-    { id: 'persos',        stepCount: 1, label: 'Personnages' },
+    { id: 'persos',        stepCount: 9, label: 'Personnages', stepIdPrefix: 'perso-' },
     // Batailles : chaque sous-bataille est traitée comme une "sous-section"
     { id: 'battle-michael',    stepCount: 4, label: 'Michael',     parent: 'batailles' },
     { id: 'battle-georgette',  stepCount: 3, label: 'Georgette',   parent: 'batailles' },
@@ -28,7 +28,7 @@
     { id: 'battle-gneisenau',  stepCount: 3, label: 'Gneisenau',   parent: 'batailles' },
     { id: 'friedensturm',  stepCount: 5, label: 'Friedensturm' },
     { id: 'bilan',         stepCount: 1, label: 'Bilan' },
-    { id: 'sources',       stepCount: 1, label: 'Sources' },
+    { id: 'credits',       stepCount: 1, label: 'Crédits' },
   ];
 
   class PresentationController {

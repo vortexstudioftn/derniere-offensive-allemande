@@ -1,82 +1,110 @@
 /* ============================================================
-   PERSONNAGES — chargement dynamique depuis data/persons.json
-   Si l'image est absente (404), affiche les initiales + un fond
-   sombre — comme ça le site tourne même sans avoir téléchargé
-   les portraits.
+   PERSONNAGES — scrollytelling cinématique
+   Un step par personnage avec portrait plein écran.
    ============================================================ */
 (function () {
   document.addEventListener('DOMContentLoaded', () => {
-    const grid = document.getElementById('persons-grid');
-    if (!grid) return;
+    const stepsContainer = document.getElementById('perso-steps');
+    const portrait = document.getElementById('perso-portrait');
+    if (!stepsContainer || !portrait) return;
 
-    // Priorité au fallback inline (marche partout, même en file://)
-    if (window.__PERSONS_FALLBACK__) {
-      renderPersons(grid, window.__PERSONS_FALLBACK__);
-      return;
+    const persons = window.__PERSONS_FALLBACK__ || [];
+    if (!persons.length) return;
+
+    const bgEl = portrait.querySelector('.persos-cine__bg');
+    const fallbackEl = portrait.querySelector('.persos-cine__fallback');
+    const sideTag = portrait.querySelector('.persos-cine__side-tag');
+
+    // Build steps HTML
+    stepsContainer.innerHTML = persons.map((p, i) => {
+      const sideLabel = p.side === 'allemand' ? 'Empire allemand' : 'Alliés';
+      return `
+        <article class="step step--perso" data-step="perso-${i + 1}" data-side="${p.side}" data-perso-idx="${i}">
+          <p class="step--perso__side" data-side="${p.side}">${sideLabel}</p>
+          <h2 class="step--perso__name">${p.name}</h2>
+          <p class="step--perso__role">${p.role}</p>
+          <p class="step--perso__bio">${p.bio}</p>
+        </article>
+      `;
+    }).join('');
+
+    // Current active person
+    let currentIdx = -1;
+
+    function showPerson(idx) {
+      if (idx === currentIdx || idx < 0 || idx >= persons.length) return;
+      currentIdx = idx;
+      const p = persons[idx];
+
+      // Portrait background
+      if (p.img) {
+        bgEl.style.backgroundImage = `url('${p.img}')`;
+        bgEl.style.filter = 'grayscale(1) contrast(1.1) brightness(0.55)';
+        bgEl.style.transform = 'scale(1.05)';
+        setTimeout(() => { bgEl.style.transform = 'scale(1)'; }, 50);
+        fallbackEl.style.opacity = '0';
+      } else {
+        bgEl.style.backgroundImage = '';
+        bgEl.style.filter = '';
+        const initials = p.name.split(' ').map(w => w[0]).join('').slice(0, 3).toUpperCase();
+        fallbackEl.textContent = initials;
+        fallbackEl.style.opacity = '1';
+      }
+
+      // Probe image — fallback to initials on error
+      if (p.img) {
+        const probe = new Image();
+        probe.onerror = () => {
+          bgEl.style.backgroundImage = '';
+          const initials = p.name.split(' ').map(w => w[0]).join('').slice(0, 3).toUpperCase();
+          fallbackEl.textContent = initials;
+          fallbackEl.style.opacity = '1';
+        };
+        probe.src = p.img;
+      }
+
+      // Side tag + portrait border
+      if (sideTag) {
+        sideTag.textContent = p.side === 'allemand' ? 'Empire allemand' : 'Alliés';
+        sideTag.style.color = p.side === 'allemand' ? 'var(--accent)' : 'var(--allied)';
+      }
+      const portraitFrame = portrait;
+      if (portraitFrame) {
+        portraitFrame.style.borderColor = p.side === 'allemand'
+          ? 'rgba(192,57,43,0.4)' : 'rgba(58,107,140,0.4)';
+      }
     }
-    // Fallback fetch (au cas où on enlèverait l'inline plus tard)
-    fetch('data/persons.json')
-      .then((r) => r.json())
-      .then((persons) => renderPersons(grid, persons))
-      .catch(() => {
-        grid.innerHTML = '<p style="color:var(--text-dim);font-style:italic;">Personnages indisponibles.</p>';
+
+    // Show first person by default
+    showPerson(0);
+
+    // ScrollTrigger for each step
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      stepsContainer.querySelectorAll('.step--perso').forEach((step) => {
+        ScrollTrigger.create({
+          trigger: step,
+          start: 'top 65%',
+          end: 'bottom 35%',
+          onEnter: () => {
+            step.classList.add('is-active');
+            showPerson(parseInt(step.dataset.persoIdx));
+          },
+          onEnterBack: () => {
+            step.classList.add('is-active');
+            showPerson(parseInt(step.dataset.persoIdx));
+          },
+          onLeave: () => step.classList.remove('is-active'),
+          onLeaveBack: () => step.classList.remove('is-active'),
+        });
       });
-  });
+    }
 
-  function renderPersons(grid, persons) {
-    grid.innerHTML = persons
-      .map((p) => {
-        const initials = p.name
-          .split(' ')
-          .map((w) => w[0])
-          .join('')
-          .slice(0, 3)
-          .toUpperCase();
-        const bgImage = p.img ? `background-image:url('${p.img}');` : '';
-        const fallbackInitials = `
-          <div class="person-card__fallback" aria-hidden="true">${initials}</div>
-        `;
-        return `
-          <article class="person-card">
-            <div class="person-card__img" style="${bgImage}"></div>
-            ${p.img ? '' : fallbackInitials}
-            <div class="person-card__overlay">
-              <p class="person-card__side" data-side="${p.side}">${p.side === 'allemand' ? 'Empire allemand' : 'Alliés'}</p>
-              <p class="person-card__name">${p.name}</p>
-              <p class="person-card__role">${p.role}</p>
-            </div>
-          </article>
-        `;
-      })
-      .join('');
-
-    // Si une image foire au chargement, on bascule sur les initiales
-    grid.querySelectorAll('.person-card').forEach((card) => {
-      const imgDiv = card.querySelector('.person-card__img');
-      if (!imgDiv) return;
-      const bg = imgDiv.style.backgroundImage;
-      if (!bg || bg === 'none') return;
-      const url = bg.slice(5, -2);
-      const probe = new Image();
-      probe.onerror = () => {
-        imgDiv.style.backgroundImage = '';
-        imgDiv.style.background = 'linear-gradient(135deg, #1f1d1a 0%, #0a0a0a 100%)';
-        const card2 = imgDiv.closest('.person-card');
-        const nameEl = card2.querySelector('.person-card__name');
-        if (!card2.querySelector('.person-card__fallback') && nameEl) {
-          const initials = nameEl.textContent
-            .split(' ')
-            .map((w) => w[0])
-            .join('')
-            .slice(0, 3)
-            .toUpperCase();
-          const div = document.createElement('div');
-          div.className = 'person-card__fallback';
-          div.textContent = initials;
-          card2.insertBefore(div, card2.querySelector('.person-card__overlay'));
-        }
-      };
-      probe.src = url;
+    // Keyboard nav support (listens for step:enter events from presentation.js)
+    document.addEventListener('step:enter', (e) => {
+      const id = e.detail.id;
+      if (!id || !id.startsWith('perso-')) return;
+      const idx = parseInt(id.replace('perso-', '')) - 1;
+      showPerson(idx);
     });
-  }
+  });
 })();

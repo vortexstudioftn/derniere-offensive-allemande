@@ -14,6 +14,10 @@ Thumbs.db
 Desktop.ini
 .DS_Store
 
+# Logs
+debug.log
+*.log
+
 # Editors
 .vscode/
 *.swp

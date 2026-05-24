@@ -421,93 +421,191 @@
 }
 
 /* ============================================================
-   SECTION 4 — PERSONNAGES
+   SECTION 4 — PERSONNAGES (scrollytelling cinématique)
    ============================================================ */
-.persons-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.person-card {
+.section--persos-cine {
   position: relative;
-  cursor: pointer;
-  overflow: hidden;
-  background: var(--bg-elev);
-  border: 1px solid var(--rule);
+  background: var(--bg);
+  padding: 0;
+}
+
+.persos-cine__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+}
+
+/* Voile latéral droit (comme les batailles) */
+.persos-cine__sticky::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(10, 10, 10, 0.15) 0%,
+    rgba(10, 10, 10, 0) 35%,
+    rgba(10, 10, 10, 0) 50%,
+    rgba(10, 10, 10, 0.55) 75%,
+    rgba(10, 10, 10, 0.85) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.persos-cine__portrait {
+  position: relative;
+  width: 340px;
+  max-width: 30vw;
   aspect-ratio: 3 / 4;
-  transition: transform 0.4s ease, border-color 0.3s ease;
+  margin-left: 12vw;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  transition: border-color 0.4s ease;
+  z-index: 1;
 }
 
-.person-card:hover {
-  transform: translateY(-6px);
-  border-color: var(--accent);
-}
-
-.person-card__img {
+.persos-cine__bg {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center top;
   filter: grayscale(1) contrast(1.05) brightness(0.8);
-  transition: filter 0.4s ease, transform 0.6s ease;
+  transition: background-image 0.5s ease, transform 0.6s ease;
+  transform: scale(1);
 }
 
-.person-card:hover .person-card__img {
-  filter: grayscale(0.3) contrast(1.1) brightness(0.95);
-  transform: scale(1.05);
-}
-
-.person-card__fallback {
+.persos-cine__fallback {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--display);
-  font-size: 3.5rem;
+  font-size: 4rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   color: var(--text-faint);
   background: linear-gradient(135deg, #1f1d1a 0%, #0a0a0a 100%);
   z-index: 0;
+  transition: opacity 0.4s ease;
 }
 
-.person-card__overlay {
+.persos-cine__gradient {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(10,10,10,0.95) 10%, rgba(10,10,10,0.4) 50%, transparent 100%);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 1.5rem;
+  background: linear-gradient(to top, rgba(10,10,10,0.7) 0%, transparent 40%);
   z-index: 1;
 }
 
-.person-card__side {
+.persos-cine__side-tag {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
   font-family: var(--display);
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   text-transform: uppercase;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.4em;
+  z-index: 3;
+  transition: color 0.4s ease;
+}
+
+.persos-cine__steps {
+  position: relative;
+  z-index: 3;
+  max-width: 480px;
+  width: 38%;
+  margin: -100vh 5vw 0 auto;
+  padding: 4rem 0;
+  pointer-events: none;
+}
+
+.step--perso {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.8rem 2rem;
+  background: rgba(8, 8, 8, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-left: 3px solid transparent;
+  margin-bottom: 2rem;
+  opacity: 0.25;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.4s ease;
+  pointer-events: auto;
+}
+
+.step--perso.is-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.step--perso[data-side="allemand"] { border-left-color: var(--accent); }
+.step--perso[data-side="allié"] { border-left-color: var(--allied); }
+
+.step--perso__side {
+  font-family: var(--display);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
   margin-bottom: 0.5rem;
 }
+.step--perso__side[data-side="allemand"] { color: var(--accent); }
+.step--perso__side[data-side="allié"] { color: var(--allied); }
 
-.person-card__side[data-side="allemand"] { color: var(--accent); }
-.person-card__side[data-side="allié"] { color: var(--allied); }
-
-.person-card__name {
+.step--perso__name {
   font-family: var(--serif);
-  font-size: 1.4rem;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
   font-weight: 600;
-  line-height: 1.1;
   color: #fff;
+  line-height: 1.1;
+  margin-bottom: 0.4rem;
 }
 
-.person-card__role {
-  font-size: 0.85rem;
+.step--perso__role {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  color: var(--sepia);
+  font-style: italic;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.step--perso__bio {
+  font-family: var(--serif);
+  font-size: 0.95rem;
   color: var(--text-dim);
-  margin-top: 0.4rem;
+  line-height: 1.6;
+}
+
+.section--doullens {
+  background: var(--bg);
+  padding: 6rem 0;
+}
+
+@media (max-width: 768px) {
+  .persos-cine__portrait {
+    position: absolute;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    max-width: 40vw;
+    margin-left: 0;
+    opacity: 0.4;
+  }
+  .persos-cine__steps {
+    width: 90%;
+    max-width: 90%;
+    margin: -100vh auto 0;
+  }
+  .step--perso { padding: 1.5rem; min-height: 75vh; }
 }
 
 /* ============================================================
@@ -648,31 +746,159 @@
 }
 
 /* ============================================================
-   SECTION 7 — SOURCES
+   SECTION 8 — CINÉMATIQUE FINALE
    ============================================================ */
-.section--sources {
-  background: #050505;
-  padding: 5rem 0 3rem;
-  border-top: 1px solid var(--rule);
+.section--cinematic {
+  position: relative;
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #020202;
+  overflow: hidden;
+  padding: 0;
 }
 
-.sources-list {
-  margin: 2rem 0;
-  max-width: 760px;
+#particles-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
 
-.sources-list li {
-  padding: 0.8rem 0;
-  border-bottom: 1px solid var(--rule);
+.cine__container {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  width: 100%;
+  max-width: 900px;
+  height: 60vh;
+  padding: 0 2rem;
+}
+
+.cine__names,
+.cine__class,
+.cine__sources,
+.cine__quote,
+.cine__end {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cine__label {
+  font-family: var(--display);
+  text-transform: uppercase;
+  letter-spacing: 0.6em;
+  font-size: 0.75rem;
+  color: var(--accent);
+  margin-bottom: 2rem;
+}
+
+.cine__name {
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+  margin: 0.3rem 0;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+.cine__name span {
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  text-shadow: 0 0 40px var(--accent-glow), 0 0 80px rgba(192,57,43,0.2);
+}
+
+.cine__classline {
+  font-family: var(--display);
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
   color: var(--text-dim);
-  font-size: 0.95rem;
 }
 
-.credits {
-  margin-top: 3rem;
+.cine__sources-title {
+  font-family: var(--display);
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
   font-size: 0.8rem;
-  color: var(--text-faint);
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+
+.cine__sources-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cine__sources-list li {
+  font-family: var(--sans);
+  font-size: clamp(0.85rem, 1.5vw, 1.05rem);
+  color: var(--text-dim);
+  padding: 0.5rem 0;
   letter-spacing: 0.05em;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+.cine__quote blockquote {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cine__quote blockquote p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.3;
+  text-shadow: 0 0 60px rgba(192,57,43,0.3);
+}
+
+.cine__quote cite {
+  display: block;
+  margin-top: 1.5rem;
+  font-family: var(--display);
+  font-size: 0.85rem;
+  font-style: normal;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.cine__endline {
+  font-family: var(--display);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700;
+  letter-spacing: 0.6em;
+  color: var(--accent);
+  text-shadow: 0 0 60px var(--accent-glow), 0 0 120px rgba(192,57,43,0.3);
+}
+
+@media (max-width: 768px) {
+  .cine__name {
+    font-size: 2rem;
+  }
+  .cine__sources-list li {
+    font-size: 0.8rem;
+  }
 }
 
 /* ============================================================

@@ -1,49 +1,73 @@
 {
   "_meta": {
     "format": "Leaflet [latitude, longitude]",
-    "source": "Wikipédia + atlas historiques 14-18. Vérifié manuellement pour précision Kaiserschlacht 1918.",
+    "source": "OSM Nominatim + Wikipedia + atlas historiques 14-18. Coordonnées vérifiées mai 2026.",
     "rule": "Toujours utiliser ces coordonnées plutôt que d'en inventer. Si un lieu manque, demander à l'utilisateur ou ajouter au fichier."
   },
 
   "cities": {
     "paris":              [48.8566, 2.3522],
     "amiens":             [49.8950, 2.3022],
-    "arras":              [50.2910, 2.7778],
+    "arras":              [50.2930, 2.7819],
     "saint_quentin":      [49.8489, 3.2876],
-    "reims":              [49.2583, 4.0317],
+    "reims":              [49.2578, 4.0319],
     "verdun":             [49.1593, 5.3781],
-    "soissons":           [49.3815, 3.3236],
+    "soissons":           [49.3838, 3.3276],
     "doullens":           [50.1583, 2.3417],
     "compiegne":          [49.4179, 2.8261],
     "cambrai":            [50.1747, 3.2356],
     "lille":              [50.6292, 3.0573],
-    "ypres":              [50.8503, 2.8853],
-    "armentieres":        [50.6852, 2.8819],
-    "hazebrouck":         [50.7269, 2.5404],
-    "chateau_thierry":    [49.0411, 3.4006],
-    "villers_cotterets":  [49.2553, 3.0903],
-    "noyon":              [49.5832, 3.0001],
-    "montdidier":         [49.6489, 2.5694],
-    "albert":             [50.0050, 2.6531],
-    "peronne":            [49.9281, 2.9332],
-    "la_fere":            [49.6614, 3.3672],
-    "craonne":            [49.4422, 3.7842],
-    "chemin_des_dames":   [49.4500, 3.7000],
+    "ypres":              [50.8522, 2.8846],
+    "armentieres":        [50.6867, 2.8822],
+    "hazebrouck":         [50.7226, 2.5360],
+    "chateau_thierry":    [49.0457, 3.4027],
+    "villers_cotterets":  [49.2549, 3.0909],
+    "noyon":              [49.5806, 3.0000],
+    "montdidier":         [49.6486, 2.5708],
+    "albert":             [50.0028, 2.6528],
+    "peronne":            [49.9292, 2.9325],
+    "la_fere":            [49.6625, 3.3664],
+    "craonne":            [49.4394, 3.7872],
+    "chemin_des_dames":   [49.4557, 3.4900],
     "saint_mihiel":       [48.8889, 5.5444],
     "rethondes":          [49.4253, 2.9056],
     "compiegne_clairiere":[49.4267, 2.9078],
-    "epernay":            [49.0428, 3.9583],
+    "epernay":            [49.0426, 3.9529],
     "chalons_sur_marne":  [48.9569, 4.3636],
-    "dormans":            [49.0744, 3.6411],
-    "fismes":             [49.3072, 3.6817],
-    "bapaume":            [50.1078, 2.8517],
-    "ham":                [49.7456, 3.0719],
-    "ressons":            [49.5497, 2.7228],
-    "moreuil":            [49.7706, 2.4886],
-    "villers_bretonneux": [49.8689, 2.5167],
-    "kemmel":             [50.7800, 2.8167],
-    "merville":           [50.6464, 2.6411],
-    "bethune":            [50.5294, 2.6403],
+    "dormans":            [49.0746, 3.6384],
+    "fismes":             [49.3072, 3.6803],
+    "bapaume":            [50.1044, 2.8519],
+    "ham":                [49.7472, 3.0736],
+    "ressons":            [49.5394, 2.7448],
+    "moreuil":            [49.7753, 2.4839],
+    "villers_bretonneux": [49.8700, 2.5200],
+    "kemmel":             [50.7790, 2.8130],
+    "merville":           [50.6437, 2.6387],
+    "bethune":            [50.5309, 2.6389],
+    "roye":               [49.7008, 2.7911],
+    "chaulnes":           [49.8164, 2.8047],
+    "nesle":              [49.7586, 2.9106],
+    "bailleul":           [50.7397, 2.7349],
+    "neuve_chapelle":     [50.5839, 2.7799],
+    "givenchy":           [50.5289, 2.7575],
+    "estaires":           [50.6440, 2.7227],
+    "la_bassee":          [50.5316, 2.8047],
+    "messines":           [50.7598, 2.8998],
+    "wytschaete":         [50.7857, 2.8826],
+    "locon":              [50.5707, 2.6665],
+    "berry_au_bac":       [49.4032, 3.8998],
+    "fere_en_tardenois":  [49.2012, 3.5135],
+    "belleau":            [49.0839, 3.2930],
+    "belleau_wood":       [49.0671, 3.2981],
+    "vaux":               [49.0450, 3.3488],
+    "suippes":            [49.1308, 4.5318],
+    "mourmelon":          [49.1373, 4.3660],
+    "ressons_sur_matz":   [49.5394, 2.7448],
+    "ribecourt":          [49.5107, 2.9231],
+    "rosieres":           [49.8160, 2.7030],
+    "flesquieres":        [50.1248, 3.1212],
+    "vendhuile":          [50.0090, 3.2070],
+    "bullecourt":         [50.1931, 2.9286],
     "brest_port":         [48.3905, -4.4861],
     "saint_nazaire_port": [47.2734, -2.2138],
     "le_havre_port":      [49.4944, 0.1079],
@@ -94,23 +118,43 @@
       "dates": "21 mars → 5 avril 1918",
       "secteur": "Picardie, entre Arras et La Fère",
       "front_initial": [
-        [50.2910, 2.7778],
-        [50.1747, 3.2356],
+        [50.2930, 2.7819],
+        [50.1931, 2.9286],
+        [50.1248, 3.1212],
+        [50.0090, 3.2070],
+        [49.9611, 3.2358],
+        [49.8700, 3.2522],
         [49.8489, 3.2876],
-        [49.6614, 3.3672]
+        [49.7472, 3.0736],
+        [49.6625, 3.3664]
       ],
       "front_final": [
-        [50.0050, 2.6531],
-        [49.9281, 2.9332],
-        [49.7706, 2.4886],
-        [49.6489, 2.5694]
+        [50.1044, 2.8519],
+        [50.0028, 2.6528],
+        [49.8700, 2.5200],
+        [49.7753, 2.4839],
+        [49.6486, 2.5708],
+        [49.7008, 2.7911],
+        [49.7586, 2.9106],
+        [49.5806, 3.0000]
       ],
-      "axis_arrow": [
+      "axis_17th_army": [
+        [50.1931, 2.9286],
+        [50.1044, 2.8519]
+      ],
+      "axis_2nd_army": [
+        [50.0090, 3.2070],
+        [49.9292, 2.9325],
+        [50.0028, 2.6528]
+      ],
+      "axis_18th_army": [
         [49.8489, 3.2876],
-        [49.8950, 2.3022]
+        [49.7586, 2.9106],
+        [49.7008, 2.7911],
+        [49.6486, 2.5708]
       ],
-      "key_markers": ["saint_quentin", "amiens", "peronne", "albert", "montdidier"],
-      "view": { "center": [49.85, 2.8], "zoom": 9 }
+      "key_markers": ["saint_quentin", "amiens", "peronne", "albert", "montdidier", "bapaume", "villers_bretonneux", "moreuil"],
+      "view": { "center": [49.85, 2.95], "zoom": 9 }
     },
 
     "georgette": {
@@ -118,16 +162,28 @@
       "dates": "9 → 29 avril 1918",
       "secteur": "Flandres, vallée de la Lys",
       "front_initial": [
-        [50.6852, 2.8819],
-        [50.6464, 2.6411],
-        [50.5294, 2.6403]
+        [50.8522, 2.8846],
+        [50.7857, 2.8826],
+        [50.7598, 2.8998],
+        [50.6867, 2.8822],
+        [50.5839, 2.7799],
+        [50.5316, 2.8047]
+      ],
+      "front_final": [
+        [50.8522, 2.8846],
+        [50.7790, 2.8130],
+        [50.7397, 2.7349],
+        [50.6437, 2.6387],
+        [50.5707, 2.6665],
+        [50.5309, 2.6389]
       ],
       "axis_arrow": [
-        [50.6852, 2.8819],
-        [50.7269, 2.5404]
+        [50.6867, 2.8822],
+        [50.6440, 2.7227],
+        [50.7226, 2.5360]
       ],
-      "key_markers": ["armentieres", "hazebrouck", "kemmel", "bethune", "ypres"],
-      "view": { "center": [50.7, 2.8], "zoom": 10 }
+      "key_markers": ["armentieres", "hazebrouck", "kemmel", "bethune", "ypres", "bailleul", "merville"],
+      "view": { "center": [50.7, 2.78], "zoom": 10 }
     },
 
     "blucher_yorck": {
@@ -135,15 +191,28 @@
       "dates": "27 mai → 6 juin 1918",
       "secteur": "Chemin des Dames, Aisne, Marne",
       "front_initial": [
-        [49.3815, 3.3236],
-        [49.4500, 3.7000],
-        [49.2583, 4.0317]
+        [49.3838, 3.3276],
+        [49.4557, 3.4900],
+        [49.4394, 3.7872],
+        [49.4032, 3.8998],
+        [49.2578, 4.0319]
+      ],
+      "front_final": [
+        [49.3838, 3.3276],
+        [49.0839, 3.2930],
+        [49.0457, 3.4027],
+        [49.0746, 3.6384],
+        [49.2012, 3.5135],
+        [49.3072, 3.6803],
+        [49.2578, 4.0319]
       ],
       "axis_arrow": [
-        [49.4500, 3.7000],
-        [49.0411, 3.4006]
+        [49.4394, 3.7872],
+        [49.3072, 3.6803],
+        [49.2012, 3.5135],
+        [49.0457, 3.4027]
       ],
-      "key_markers": ["soissons", "chemin_des_dames", "reims", "chateau_thierry", "fismes"],
+      "key_markers": ["soissons", "chemin_des_dames", "reims", "chateau_thierry", "fismes", "fere_en_tardenois", "belleau"],
       "view": { "center": [49.2, 3.6], "zoom": 9 }
     },
 
@@ -151,30 +220,50 @@
       "name": "Opération Gneisenau — l'attaque oubliée",
       "dates": "9 → 13 juin 1918",
       "secteur": "Matz, entre Noyon et Montdidier",
-      "axis_arrow": [
-        [49.5832, 3.0001],
-        [49.6489, 2.5694]
+      "front_initial": [
+        [49.6486, 2.5708],
+        [49.5394, 2.7448],
+        [49.5806, 3.0000]
       ],
-      "key_markers": ["noyon", "montdidier", "ressons", "compiegne"],
-      "view": { "center": [49.6, 2.8], "zoom": 10 }
+      "axis_arrow": [
+        [49.5806, 3.0000],
+        [49.5394, 2.7448],
+        [49.6486, 2.5708]
+      ],
+      "key_markers": ["noyon", "montdidier", "ressons_sur_matz", "compiegne", "ribecourt"],
+      "view": { "center": [49.55, 2.78], "zoom": 10 }
     },
 
     "friedensturm": {
       "name": "Friedensturm — 2ᵉ bataille de la Marne",
       "dates": "15 → 18 juillet 1918",
       "secteur": "Champagne + saillant de la Marne",
-      "axis_arrow": [
-        [49.0411, 3.4006],
-        [48.85, 3.0]
+      "salient": [
+        [49.3838, 3.3276],
+        [49.0839, 3.2930],
+        [49.0457, 3.4027],
+        [49.0746, 3.6384],
+        [49.0426, 3.9529],
+        [49.2578, 4.0319]
+      ],
+      "axis_west_of_reims": [
+        [49.2578, 4.0319],
+        [49.0746, 3.6384],
+        [49.0426, 3.9529]
+      ],
+      "axis_east_of_reims": [
+        [49.1373, 4.3660],
+        [49.1308, 4.5318]
       ],
       "counter_attack": {
         "name": "Contre-attaque Mangin (18 juillet)",
-        "from": [49.2553, 3.0903],
-        "to": [49.0411, 3.4006],
+        "from": [49.2549, 3.0909],
+        "via": [49.3072, 3.3000],
+        "to": [49.3838, 3.3276],
         "color": "#3498db"
       },
-      "key_markers": ["chateau_thierry", "reims", "epernay", "villers_cotterets", "dormans"],
-      "view": { "center": [49.15, 3.5], "zoom": 9 }
+      "key_markers": ["chateau_thierry", "reims", "epernay", "villers_cotterets", "dormans", "belleau", "mourmelon"],
+      "view": { "center": [49.15, 3.55], "zoom": 9 }
     }
   },
 
@@ -227,7 +316,7 @@
     "villers_cotterets_counter": {
       "name": "Contre-offensive Villers-Cotterêts (Mangin)",
       "date": "1918-07-18",
-      "coords": [49.2553, 3.0903]
+      "coords": [49.2549, 3.0909]
     }
   }
 }

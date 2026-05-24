@@ -224,19 +224,26 @@
   </section>
 
   <!-- ============================================================
-       SECTION 4 — PERSONNAGES
+       SECTION 4 — PERSONNAGES (scrollytelling cinématique)
        ============================================================ -->
-  <section id="persos" class="section section--persos" data-chapter="4">
-    <div class="container">
-      <p class="section__overline">Chapitre 03</p>
-      <h2 class="section__title">Les visages de l'offensive</h2>
-      <p class="section__lede">Les hommes qui ont conçu, subi et brisé la Kaiserschlacht.</p>
-
-      <div class="persons-grid" id="persons-grid">
-        <!-- Rempli dynamiquement depuis data/persons.json -->
+  <section id="persos" class="section section--persos-cine" data-chapter="4">
+    <div class="persos-cine__sticky">
+      <div class="persos-cine__portrait" id="perso-portrait">
+        <div class="persos-cine__bg"></div>
+        <div class="persos-cine__fallback"></div>
+        <div class="persos-cine__gradient"></div>
+        <div class="persos-cine__side-tag"></div>
       </div>
+    </div>
 
-      <!-- Vitrail commémoratif de Doullens -->
+    <div class="persos-cine__steps" id="perso-steps">
+      <!-- Rempli dynamiquement par persons.js -->
+    </div>
+  </section>
+
+  <!-- Vitrail commémoratif de Doullens (entre personnages et batailles) -->
+  <section class="section section--doullens">
+    <div class="container">
       <div class="doullens-memorial">
         <div class="doullens-memorial__img">
           <img src="assets/img/archive/foch-doullens.jpg" alt="Vitrail commémoratif de la conférence de Doullens, 26 mars 1918" loading="lazy">
@@ -523,24 +530,50 @@
   </section>
 
   <!-- ============================================================
-       SECTION 8 — SOURCES
+       SECTION 8 — CINÉMATIQUE FINALE (crédits)
        ============================================================ -->
-  <section id="sources" class="section section--sources">
-    <div class="container">
-      <h2 class="section__title section__title--small">Sources & bibliographie</h2>
-      <ul class="sources-list">
-        <li>EHNE / Eduscol — <em>Mars 1918, la dernière offensive allemande</em> (programme Première Générale)</li>
-        <li>Wikipédia FR — <em>Offensive du Printemps</em>, <em>Bataille de la Marne (1918)</em></li>
-        <li>Chemins de mémoire (Min. des Armées) — Friedensturm / Seconde bataille de la Marne</li>
-        <li>ECPAD — fonds photographiques et cinématographiques</li>
-        <li>Mémoire des Hommes (SHD) — JMO des unités engagées</li>
-        <li>National WWI Museum (Kansas City) — cartes animées 1914-1918</li>
-        <li>The Map as History — cartographie pédagogique de la Première Guerre mondiale</li>
-      </ul>
-      <p class="credits">
-        Exposé d'histoire · Première Générale · Mai 2026<br />
-        Présentation construite avec HTML, Leaflet.js et GSAP.
-      </p>
+  <section id="credits" class="section section--cinematic" data-chapter="8">
+    <canvas id="particles-canvas" aria-hidden="true"></canvas>
+    <div class="cine__container">
+
+      <!-- Phase 1 : Noms qui explosent -->
+      <div class="cine__names">
+        <p class="cine__label">Présenté par</p>
+        <h2 class="cine__name cine__name--1">Orlan <span>BARROSO</span></h2>
+        <h2 class="cine__name cine__name--2">Adrien <span>BESSET</span></h2>
+      </div>
+
+      <!-- Phase 2 : Classe -->
+      <div class="cine__class">
+        <p class="cine__classline">Première Générale · 2026</p>
+      </div>
+
+      <!-- Phase 3 : Sources qui orbitent -->
+      <div class="cine__sources">
+        <p class="cine__sources-title">Sources</p>
+        <ul class="cine__sources-list">
+          <li>EHNE / Eduscol</li>
+          <li>Wikipédia FR</li>
+          <li>Chemins de mémoire</li>
+          <li>ECPAD</li>
+          <li>Mémoire des Hommes</li>
+          <li>National WWI Museum</li>
+          <li>The Map as History</li>
+        </ul>
+      </div>
+
+      <!-- Phase 4 : Citation finale -->
+      <div class="cine__quote">
+        <blockquote>
+          <p>« Le 8 août fut le jour noir de l'armée allemande. »</p>
+          <cite>— Erich Ludendorff, <em>Mémoires de guerre</em></cite>
+        </blockquote>
+      </div>
+
+      <!-- Phase 5 : Fin -->
+      <div class="cine__end">
+        <p class="cine__endline">FIN</p>
+      </div>
     </div>
   </section>
 
@@ -586,6 +619,7 @@
   <script src="js/maps/friedensturm.js"></script>
   <script src="js/persons.js"></script>
   <script src="js/presentation.js"></script>
+  <script src="js/cinematic.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

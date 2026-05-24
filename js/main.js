@@ -48,7 +48,7 @@
           }
         });
       },
-      { threshold: 0.4 }
+      { threshold: 0.05, rootMargin: '-20% 0px -70% 0px' }
     );
     sections.forEach((s) => chapterObserver.observe(s));
 
