@@ -131,19 +131,59 @@ Dans `js/presentation.js`, ajouter une entrée dans `SECTIONS` :
 - `stepCount` = nombre d'états interactifs
 - `stepIdPrefix` est optionnel — met si tu utilises `step:enter` côté carte (ex: `'mon-1'`, `'mon-2'`...)
 
-## Anti-patterns spécifiques à ce projet
+## Pattern 6 — Parallax sur image-bleed (ajout session 6)
 
-- ❌ **Pas de `fetch()` pour les données** — toujours inline dans `index.html` via `window.__DATA__` (compat `file://`)
-- ❌ **Pas de scroll-jacking** (le scroll natif doit rester fluide)
-- ❌ **Pas d'animation CSS continue infinie** sur fond (sauf grain du Hook) — distrayant sur projecteur
-- ❌ **Pas de `position: fixed` sur du contenu** dans les sections scroll (casse le sticky)
-- ❌ **Pas oublier le z-index** : tile-pane Leaflet est à 200, voile à 400, panneau de texte au-dessus
-- ❌ **Pas appeler `.invalidateSize()` Leaflet** sauf si vraiment nécessaire — provoque flashes
+```js
+gsap.fromTo(img,
+  { yPercent: -8 },
+  { yPercent: 8, ease: 'none',
+    scrollTrigger: {
+      trigger: img.closest('.image-bleed'),
+      start: 'top bottom', end: 'bottom top',
+      scrub: true,
+    },
+  }
+);
+```
+
+## Pattern 7 — Reveal titre mot-par-mot (ajout session 6)
+
+Decoupe le titre en spans `.word-reveal > .word-reveal__inner`, puis GSAP stagger :
+```js
+gsap.to(inners, {
+  yPercent: 0, opacity: 1, duration: 0.7,
+  stagger: 0.08, ease: 'power3.out',
+});
+```
+CSS requis :
+```css
+.word-reveal { display: inline-block; overflow: hidden; vertical-align: bottom; }
+.word-reveal__inner { display: inline-block; will-change: transform, opacity; }
+```
+
+## Pattern 8 — Personnages scrollytelling (ajout session 6)
+
+Portrait cadre (3:4) dans `.persos-cine__portrait` a gauche, steps texte a droite.
+Le JS `persons.js` ecoute les ScrollTrigger ET les events `step:enter` (prefix `perso-`)
+pour changer le portrait dynamiquement. La bordure du cadre change de couleur selon la faction.
+
+## Anti-patterns specifiques a ce projet
+
+- Pas de `fetch()` pour les donnees -- toujours inline dans `index.html` via `window.__DATA__` (compat `file://`)
+- Pas de scroll-jacking (le scroll natif doit rester fluide)
+- Pas d'animation CSS continue infinie sur fond (sauf grain du Hook) -- distrayant sur projecteur
+- Pas de `position: fixed` sur du contenu dans les sections scroll (casse le sticky)
+- Pas oublier le z-index : tile-pane Leaflet est a 200, voile a 400, panneau de texte au-dessus
+- Pas appeler `.invalidateSize()` Leaflet sauf si vraiment necessaire -- provoque flashes
+- Nav laterale : utiliser `rootMargin: '-20% 0px -70% 0px'` + `threshold: 0.05` pour les sections longues
 
 ## Where to look
 
-- `js/scrollytelling.js` — ScrollTrigger setup, émet `step:enter`
-- `js/presentation.js` — mode clavier, émet `presentation:step` + `step:enter`
-- `js/counters.js` — pattern count-up
-- `js/maps/*.js` — consomment `step:enter`
-- `css/main.css` — styles `.step`, `.scroll__*`, voile
+- `js/scrollytelling.js` -- ScrollTrigger setup, emet `step:enter`, parallax, reveal titres
+- `js/presentation.js` -- mode clavier, emet `presentation:step` + `step:enter`
+- `js/counters.js` -- pattern count-up
+- `js/persons.js` -- personnages scrollytelling cinematique
+- `js/cinematic.js` -- cinematique de fin (particules canvas + GSAP timeline)
+- `js/maps/*.js` -- consomment `step:enter`
+- `css/main.css` -- styles `.step`, `.scroll__*`, voile, word-reveal
+- `css/sections.css` -- styles sections specifiques (persos-cine, cinematic, etc.)

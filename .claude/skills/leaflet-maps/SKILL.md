@@ -5,139 +5,139 @@ description: Patterns Leaflet pour les cartes scrollytelling du site Kaiserschla
 
 # Cartes Leaflet — Kaiserschlacht 1918
 
-## 🚨 Règle absolue : ne JAMAIS inventer de coordonnées
+## Règle absolue : ne JAMAIS inventer de coordonnées
 
 Avant de placer quoi que ce soit sur la carte :
-1. Lire `coordinates.json` (dans ce même dossier).
-2. Si le lieu est dedans → l'utiliser, tel quel.
-3. Si le lieu n'y est PAS → **demander à l'utilisateur**, ne pas deviner.
-4. Si la donnée doit être ajoutée → la proposer au format du fichier et la committer dedans.
+1. Lire `coordinates.json` (racine du projet).
+2. Si le lieu est dedans -> l'utiliser, tel quel.
+3. Si le lieu n'y est PAS -> **demander a l'utilisateur**, ne pas deviner.
+4. Si la donnee doit etre ajoutee -> la proposer au format du fichier et la committer dedans.
+5. Toutes les coordonnees sont verifiees via OSM Nominatim + Wikipedia (mai 2026).
 
-Format : `[latitude, longitude]` (ordre Leaflet — pas GeoJSON qui est inversé).
+Format : `[latitude, longitude]` (ordre Leaflet -- pas GeoJSON qui est inverse).
 
-## Setup carte (dark, immersive, scroll-friendly)
+## API MapFX (js/maps/_map-helpers.js)
+
+Toutes les cartes utilisent le namespace `window.MapFX`. Ne pas reinventer les helpers.
 
 ```js
-const map = L.map('map', {
-  center: [49.5, 3.5],          // Picardie, centre des offensives
-  zoom: 7,
-  zoomControl: false,             // UI cachée pour l'immersion
-  attributionControl: true,
-  scrollWheelZoom: false,         // ❗ sinon le scroll page est bloqué
+// Tiles sombres (CARTO dark nolabels + labels)
+MapFX.darkTiles().addTo(map);
+
+// Polyline animee avec fleche (stroke-dashoffset CSS)
+MapFX.animatedPolyline(latlngs, {
+  color: '#c0392b',  // rouge allemand ou '#3a6b8c' bleu allie
+  weight: 5,
+  duration: 1.8,     // secondes
+  delay: 0.4,        // delai avant animation
+  arrow: true,       // pointe de fleche auto
+  arrowSize: 12,
+}).addTo(map);
+
+// Marqueur pulsant (halo anime)
+MapFX.pulseMarker([49.895, 2.302], {
+  color: '#c0392b',
+  size: 18,          // diametre halo
+  label: '<strong>Amiens</strong><br>Noeud ferroviaire',
+}).addTo(map);
+
+// Label texte permanent
+MapFX.cityLabel([49.895, 2.302], 'Amiens').addTo(map);
+
+// Polygone semi-transparent (zone d'avance)
+MapFX.areaPolygon(latlngs, {
+  color: '#c0392b',
+  fillOpacity: 0.18,
+  weight: 2,
+}).addTo(map);
+```
+
+## Setup carte (pattern standard)
+
+```js
+const map = L.map('map-id', {
+  center: [49.85, 2.95],
+  zoom: 9,
+  zoomControl: false,
+  scrollWheelZoom: false,   // sinon le scroll page est bloque
+  dragging: false,
   doubleClickZoom: false,
-  dragging: false,                // optionnel : carte non-manipulable
+  touchZoom: false,
   keyboard: false,
+  zoomSnap: 0.25,
 });
-
-// Base sombre, sans labels
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
-  attribution: '© OpenStreetMap, © CARTO',
-  subdomains: 'abcd',
-  maxZoom: 19,
-}).addTo(map);
-
-// Labels par-dessus (lisibles même si on ajoute des overlays)
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png', {
-  subdomains: 'abcd',
-  maxZoom: 19,
-}).addTo(map);
+MapFX.darkTiles().addTo(map);
 ```
 
-## Fly-to par chapitre (au scroll)
+## Couleurs
+
+- Allemand / offensif : `#c0392b` (rouge sang, var --accent)
+- Allie / defensif : `#3a6b8c` (bleu, var --allied)
+- Front initial : `#ffffff` opacity 0.5, dashArray '4 6'
+- Front final : `#c0392b` opacity 0.35, dashArray '6 4'
+
+## Structure des fichiers carte
+
+```
+js/maps/
+  _map-helpers.js     # MapFX namespace (NE PAS MODIFIER sauf ajout de helper)
+  context.js          # Europe 1918, flux de troupes (ecoute step:enter)
+  michael.js          # Operation Michael
+  georgette.js        # Operation Georgette
+  blucher.js          # Operation Blucher-Yorck
+  gneisenau.js        # Operation Gneisenau
+  friedensturm.js     # Friedensturm + contre-offensive Mangin
+  timeline.js         # Timeline integration scroll
+```
+
+Chaque carte s'initialise dans un IIFE auto-contenu, ecoute `DOMContentLoaded`,
+et verifie `container && L && MapFX` avant de demarrer.
+
+## Pattern d'une carte de bataille
 
 ```js
-function flyToOperation(opKey) {
-  const op = COORDS.operations[opKey];
-  map.flyTo(op.view.center, op.view.zoom, {
-    duration: 2.5,
-    easeLinearity: 0.25,
+(function () {
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('map-xxx');
+    if (!container || typeof L === 'undefined' || !window.MapFX) return;
+    const map = L.map('map-xxx', { /* options standard */ });
+    MapFX.darkTiles().addTo(map);
+
+    // 1. Front initial (blanc tirete)
+    L.polyline(coords, { color: '#ffffff', weight: 2, opacity: 0.5, dashArray: '4 6' }).addTo(map);
+
+    // 2. Fleches d'attaque (animees, rouges, stagger delay)
+    axes.forEach((path, i) => {
+      MapFX.animatedPolyline(path, {
+        color: '#c0392b', weight: 5, duration: 1.8, delay: 0.4 + i * 0.3,
+      }).addTo(map);
+    });
+
+    // 3. Marqueurs villes
+    cities.forEach((c) => {
+      MapFX.pulseMarker(c.coord, { color: ..., label: ... }).addTo(map);
+      MapFX.cityLabel(c.coord, c.name).addTo(map);
+    });
+
+    // 4. Legende
+    const legend = L.control({ position: 'bottomleft' });
+    legend.onAdd = function () { ... };
+    legend.addTo(map);
   });
-}
-// Trigger via IntersectionObserver sur chaque section .chapter
+})();
 ```
-
-## Marker custom (style du site : pastille rouge ou bleue)
-
-```js
-// Pas L.marker (icône bleue par défaut moche), TOUJOURS divIcon
-function dot(color = '#c0392b', size = 14) {
-  return L.divIcon({
-    className: 'map-dot',
-    html: `<span style="
-      display:block;width:${size}px;height:${size}px;
-      background:${color};border-radius:50%;
-      box-shadow:0 0 0 2px rgba(0,0,0,.6), 0 0 12px ${color};
-    "></span>`,
-    iconSize: [size, size],
-    iconAnchor: [size/2, size/2],
-  });
-}
-
-L.marker(COORDS.cities.amiens, { icon: dot('#c0392b') })
-  .bindTooltip('Amiens', { className: 'map-label', direction: 'top' })
-  .addTo(map);
-```
-
-CSS associé :
-```css
-.map-label {
-  background: rgba(10,10,10,.85); color:#fff;
-  border:1px solid #c0392b; padding:2px 8px;
-  font: 11px/1.4 system-ui; letter-spacing:.06em;
-  text-transform:uppercase;
-}
-```
-
-## Front qui avance (polyline progressive)
-
-```js
-function animateFront(points, { color = '#c0392b', weight = 3, duration = 2000 } = {}) {
-  const line = L.polyline([points[0]], { color, weight, opacity: 0.9 }).addTo(map);
-  const stepMs = duration / (points.length - 1);
-  let i = 1;
-  const tick = () => {
-    if (i >= points.length) return;
-    line.addLatLng(points[i]);
-    i++;
-    setTimeout(tick, stepMs);
-  };
-  setTimeout(tick, stepMs);
-  return line;
-}
-
-// Usage : à l'entrée du chapitre Michael
-animateFront(COORDS.operations.michael.front_initial, { color: '#888' });
-setTimeout(() => {
-  animateFront(COORDS.operations.michael.front_final, { color: '#c0392b' });
-}, 2200);
-```
-
-## Flèche de poussée (axis_arrow)
-
-Utilise `axis_arrow` (2 points : départ → objectif) avec un Polyline + dashArray pour l'effet militaire :
-```js
-function thrustArrow(from, to, color = '#c0392b') {
-  return L.polyline([from, to], {
-    color, weight: 4, opacity: 0.85,
-    dashArray: '8 6',
-  }).addTo(map);
-}
-```
-Pour la pointe de flèche : ajouter un `divIcon` rotated au point `to` (rotation = atan2(dy,dx)).
-
-## Mouvement longue distance animé (Brest-Litovsk → Spa, US → France)
-
-Utilise les entrées `movements` du JSON. Idem `animateFront` avec 2 points + dashArray animé (CSS `stroke-dashoffset`).
 
 ## Anti-patterns
 
-- ❌ **JAMAIS inventer de coords** (voir règle absolue plus haut).
-- ❌ Pas de `L.marker` par défaut (icône bleue Leaflet = casse le design).
-- ❌ Pas de tiles claires.
-- ❌ Pas de `scrollWheelZoom: true` (bloque le scroll de la page).
-- ❌ Pas de popups (cassent le flow scroll) → utiliser tooltips ou panels HTML overlay.
-- ❌ Pas de plugins lourds (Leaflet.markercluster, etc.) — vanilla Leaflet suffit.
+- JAMAIS inventer de coords (voir regle absolue plus haut).
+- Pas de `L.marker` par defaut (icone bleue Leaflet = casse le design) -> MapFX.pulseMarker.
+- Pas de tiles claires.
+- Pas de `scrollWheelZoom: true` (bloque le scroll de la page).
+- Pas de popups (cassent le flow scroll) -> utiliser tooltips ou panels HTML overlay.
+- Pas de plugins lourds (Leaflet.markercluster, etc.) -- vanilla Leaflet suffit.
 
-## Pour vérifier visuellement
+## Pour verifier visuellement
 
-Si Playwright MCP est branché : après chaque modif carte, screenshot localhost:8000 à la section concernée et vérifier que les marqueurs/lignes sont bien sur les bonnes villes. Sans ça, c'est du code en aveugle.
+Playwright MCP est configure : apres chaque modif carte, naviguer sur localhost et
+screenshot la section concernee pour verifier que les marqueurs/lignes sont sur les bonnes villes.
+Port par defaut : 8765 (npx http-server).
